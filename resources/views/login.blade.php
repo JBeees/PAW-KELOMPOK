@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Jost', sans-serif;
+        }
+
+        body,
+        html {
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .login {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        .loginForm {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nusa {
+            font-size: 90px;
+            margin: 0;
+        }
+
+        input {
+            width: 300px;
+            height: 28px;
+            border-radius: 20px;
+            padding-left: 12px;
+        }
+
+        label {
+            margin-left: 8px;
+        }
+
+        .regis {
+            opacity: 50%;
+            font-size: 30px;
+            font-weight: 500;
+            margin: 0;
+            margin-top: -20px;
+        }
+
+        button {
+            width: 319px;
+            height: 30px;
+            border-radius: 20px;
+            margin-top: 10px;
+            background: none;
+            background-color: red;
+            color: white;
+        }
+
+        button:hover {
+            background-color: darkblue;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .masuk {
+            margin-top: 20px;
+        }
+
+        .right {
+            width: 50%;
+            position: relative;
+        }
+
+        .map {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login">
+            <h1 class="nusa">NusaFood</h1>
+            <h2 class="regis">Login</h2>
+            <form class="form">
+                <div class="loginForm">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="loginForm">
+                    <label>Kata Sandi</label>
+                    <input type="password" placeholder="Kata Sandi">
+                </div>
+            </form>
+            <button onclick="window.location.href='dashboard.html'" class="masuk">Masuk</button>
+            <button onclick="window.location.href='registrasi.html'">Register</button>
+        </div>
+        <div class="right">
+            <img src="redbox.png">
+            <img class="map" src="indo_bg.png">
+        </div>
+    </div>
+</body>
+
+</html>

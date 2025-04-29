@@ -91,7 +91,7 @@
             <div class="searchBar">
                 <div class="bar">
                     <label>Pencarian</label>
-                    <input style="width:300px;height:40px;font-size:20px;border-radius:10px;x" type="search"
+                    <input style="width:300px;height:40px;font-size:20px;border-radius:10px;" type="search"
                         placeholder="Masukkan Kata Kunci">
                 </div>
                 <div class="bar">

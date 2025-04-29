@@ -53,6 +53,7 @@
             margin: 0;
             font-weight:700;
             text-decoration: none;
+            color: black;
         }
 
         input {

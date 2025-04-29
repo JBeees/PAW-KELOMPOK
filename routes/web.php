@@ -14,3 +14,22 @@ Route::get('/laporan', function () {
 Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+Route::get('/registrasi', function () {
+    return view('registrasi');
+})->name('registrasi');
+Route::get('/dashboardIn', function () {
+    return view('loggedInDashboard');
+})->name('loggedIn');
+Route::get('/history', function () {
+    return view('historyDashboard');
+})->name('historyDashboard');
+Route::get('/upload', function () {
+    return view('uploadDashboard');
+})->name('uploadDashboard');
+Route::get('/testing', function () {
+    return view('testing');
+});
+

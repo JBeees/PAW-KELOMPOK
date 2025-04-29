@@ -5,9 +5,10 @@
             href="{{ route('peta.penyebaran') }}">Peta Penyebaran</a>
         <a class="navbarh3 {{ request()->routeIs('laporan') ? 'active' : '' }}" href="{{ route('laporan') }}">Laporan
             Program</a>
-        <a class="navbarh3 {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ route('kontak') }}">Kontak Kami/Lapor</a>
+        <a class="navbarh3 {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ route('kontak') }}">Kontak
+            Kami/Lapor</a>
     </div>
     <div class="navbar-right">
-        <a href="login.html">Login</a>
+        <a href="{{ route('login') }}">Login</a>
     </div>
 </div>

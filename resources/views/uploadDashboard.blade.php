@@ -37,36 +37,9 @@
             height: 100vh;
             border-top-left-radius: 50px;
             background-color: white;
+            padding: 20px;
             align-self: flex-end;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 80px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .info {
-            width: 100%;
-            height: auto;
-            padding-top: 30px;
-            gap: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .schoolProfile {
-            width: 25%;
-            height: 500px;
-            border: 0.5px solid black;
-            border-radius: 20px;
-        }
-        .detailSchool{
-            width: 65%;
-            height: 700px;
-            border: 0.5px solid black;
-            border-radius: 20px;
         }
     </style>
 </head>
@@ -75,21 +48,12 @@
     <div class="container">
         @include('partials.loggedInNavbar')
         <div class="page">
-            <h1 style="font-size: 50px;">Overview</h1>
-            <div class="info">
-                <div class="schoolProfile">
-
-                </div>
-                <div class="detailSchool">
-
-                </div>
-            </div>
         </div>
     </div>
     <script>
         const assetBaseUrl = "{{ asset('') }}";
         window.onload = () => {
-            document.getElementById('icon1').src = assetBaseUrl + 'Image/house-active.png'
+            document.getElementById('icon3').src = assetBaseUrl + 'Image/upload-active.png'
         }
     </script>
 </body>

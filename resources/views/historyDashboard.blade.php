@@ -40,32 +40,44 @@
             align-self: flex-end;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             padding: 80px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .info {
+        .searchBar {
             width: 100%;
-            height: auto;
-            padding-top: 30px;
-            gap: 30px;
+            height: 15%;
+            border: 0.1px solid black;
+            border-radius: 20px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            padding: 20px;
+            gap: 20px;
+            margin: 20px;
         }
 
-        .schoolProfile {
-            width: 25%;
-            height: 500px;
-            border: 0.5px solid black;
-            border-radius: 20px;
+        .bar {
+            display: flex;
+            flex-direction: column;
         }
-        .detailSchool{
-            width: 65%;
-            height: 700px;
-            border: 0.5px solid black;
+
+        input {
+            padding: 10px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            gap: 20px
+        }
+
+        .box {
+            width: 400px;
+            height: 100px;
+            border: 0.1px solid black;
             border-radius: 20px;
         }
     </style>
@@ -75,21 +87,30 @@
     <div class="container">
         @include('partials.loggedInNavbar')
         <div class="page">
-            <h1 style="font-size: 50px;">Overview</h1>
+            <h1>Daftar Laporan</h1>
+            <div class="searchBar">
+                <div class="bar">
+                    <label>Pencarian</label>
+                    <input style="width:300px;height:40px;font-size:20px;border-radius:10px;x" type="search"
+                        placeholder="Masukkan Kata Kunci">
+                </div>
+                <div class="bar">
+                    <label>Tanggal</label>
+                    <input style="width: 200px;height:40px;font-size:20px;border-radius:10px;x" type="date"
+                        placeholder="Provinsi">
+                </div>
+            </div>
             <div class="info">
-                <div class="schoolProfile">
-
-                </div>
-                <div class="detailSchool">
-
-                </div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
             </div>
         </div>
     </div>
     <script>
         const assetBaseUrl = "{{ asset('') }}";
         window.onload = () => {
-            document.getElementById('icon1').src = assetBaseUrl + 'Image/house-active.png'
+            document.getElementById('icon2').src = assetBaseUrl + 'Image/history-active.png'
         }
     </script>
 </body>

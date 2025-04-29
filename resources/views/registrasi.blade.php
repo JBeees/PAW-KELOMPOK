@@ -42,12 +42,17 @@
         form {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             gap: 10px;
+            font-size: 25px;
         }
 
         .nusa {
             font-size: 90px;
             margin: 0;
+            font-weight:700;
+            text-decoration: none;
         }
 
         input {
@@ -70,23 +75,19 @@
         }
 
         button {
-            width: 319px;
-            height: 30px;
+            width: 340px;
+            height: 40px;
             border-radius: 20px;
             margin-top: 10px;
-            background: none;
             background-color: red;
             color: white;
+            font-size: 25px;
         }
 
         button:hover {
             background-color: darkblue;
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .masuk {
-            margin-top: 20px;
         }
 
         .right {
@@ -107,29 +108,30 @@
 
 <body>
     <div class="container">
-        <div class="login">
-            <h1 class="nusa">NusaFood</h1>
-            <h2 class="regis">Register</h2>
+        <div class="login" >
+            <a href="{{ route('dashboard') }}" class="nusa">NusaFood</a>
+            <h2 class="regis">Login</h2>
             <form class="form">
                 <div class="loginForm">
                     <label>Email</label>
-                    <input type="email" placeholder="Email">
+                    <input style="width:350px;height:40px;font-size:25px" type="email" placeholder="Email">
                 </div>
                 <div class="loginForm">
                     <label>Kata Sandi</label>
-                    <input type="password" placeholder="Kata Sandi">
+                    <input style="width:350px;height:40px;font-size:25px" type="password" placeholder="Kata Sandi">
                 </div>
                 <div class="loginForm">
                     <label>Konfirmasi Kata Sandi</label>
-                    <input type="password" placeholder="Konfirmasi Kata Sandi">
+                    <input style="width:350px;height:40px;font-size:25px" type="password" placeholder="Kata Sandi">
                 </div>
+                <button type="button" onclick="window.location.href='{{ route('login') }}'"
+                    class="masuk">Masuk</button>
+                <button type="button" onclick="window.location.href='{{ route('login') }}'">Login</button>
             </form>
-            <button onclick="window.location.href='login.html'" class="masuk">Masuk</button>
-            <button onclick="window.location.href='login.html'">Login</button>
         </div>
         <div class="right">
-            <img src="redbox.png">
-            <img class="map" src="indo_bg.png">
+            <img src="{{ asset('Image/redbox.png') }}">
+            <img class="map" src="{{ asset('Image/indo_bg.png') }}">
         </div>
     </div>
 </body>

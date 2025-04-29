@@ -1,0 +1,125 @@
+.logout-button {
+    margin-top: 350px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button:hover {
+    background-color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logout-button:hover .logout-icon .door {
+    border-color: white;
+}
+
+.logout-button:hover .logout-icon .arrow::before {
+    background-color: white;
+}
+
+.logout-button:hover .logout-icon .arrow::after {
+    border-right-color: white;
+}
+
+.logout-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.logout-icon .door {
+    width: 20px;
+    height: 18px;
+    border: 2px solid black;
+    border-left: none;
+    border-radius: 0 3px 3px 0;
+    position: absolute;
+    right: 0;
+    top: 2px;
+}
+
+.logout-icon .arrow {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logout-icon .arrow::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 2px;
+    background-color: black;
+}
+
+.logout-icon .arrow::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 5px solid black;
+    position: absolute;
+    left: -5px;
+    top: -3px;
+}
+
+.navbar {
+    width: 5%;
+    height: 100vh;
+    background-color: white;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#icon0,
+#icon1,
+#icon2,
+#icon3 {
+    width: 40px;
+}
+
+#iconTitle {
+    margin-top: 5px;
+    margin-bottom: 70px;
+}
+
+.header {
+    margin-top: 40px;
+    max-width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    margin-left: 250px;
+    color: white;
+    font-size: 25px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-item:focus {
+    outline: none;
+}

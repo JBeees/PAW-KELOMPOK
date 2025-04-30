@@ -6,15 +6,15 @@
     <img style="margin-top: 50px;margin-bottom:50px" id="icon0" src="{{ asset('Image/lines.png') }}">
     <button class="nav-item" type="button" onclick="window.location.href='{{ route('loggedIn') }}'">
         <img id="icon1" src="{{ asset('Image/house.png') }}">
-        <label id="iconTitle">Beranda</label>
+        <label id="iconTitle1">Beranda</label>
     </button>
     <button class="nav-item" type="button" onclick="window.location.href='{{ route('historyDashboard') }}'">
         <img id="icon2" src="{{ asset('Image/history.png') }}">
-        <label id="iconTitle">Riwayat</label>
+        <label id="iconTitle2">Riwayat</label>
     </button>
     <button class="nav-item" type="button" onclick="window.location.href='{{ route('uploadDashboard') }}'">
         <img id="icon3" src="{{ asset('Image/upload.png') }}">
-        <label id="iconTitle">Upload</label>
+        <label id="iconTitle3">Upload</label>
     </button>
     <button onclick="window.location.href='{{ route('login') }}'" class=" logout-button">
         <div class="logout-icon">

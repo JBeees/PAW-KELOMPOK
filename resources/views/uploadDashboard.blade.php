@@ -236,6 +236,7 @@
         const assetBaseUrl = "{{ asset('') }}";
         window.onload = () => {
             document.getElementById('icon3').src = assetBaseUrl + 'Image/upload-active.png'
+            document.getElementById('iconTitle3').classList.add('active');
         }
     </script>
 </body>

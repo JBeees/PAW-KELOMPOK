@@ -90,6 +90,7 @@
         const assetBaseUrl = "{{ asset('') }}";
         window.onload = () => {
             document.getElementById('icon1').src = assetBaseUrl + 'Image/house-active.png'
+            document.getElementById('iconTitle1').classList.add('active');
         }
     </script>
 </body>

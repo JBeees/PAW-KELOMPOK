@@ -1,5 +1,5 @@
 .logout-button {
-    margin-top: 350px;
+    margin-top: 300px;
     border: none;
     border-radius: 8px;
     padding: 12px 15px;
@@ -83,6 +83,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 #icon0,
 #icon1,
 #icon2,
@@ -90,9 +91,12 @@
     width: 40px;
 }
 
-#iconTitle {
+#iconTitle1,
+#iconTitle2,
+#iconTitle3 {
     margin-top: 5px;
     margin-bottom: 70px;
+    font-size: 20px;
 }
 
 .header {
@@ -122,4 +126,7 @@
 
 .nav-item:focus {
     outline: none;
+}
+.active{
+    color: red;
 }

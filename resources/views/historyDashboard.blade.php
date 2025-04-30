@@ -111,6 +111,7 @@
         const assetBaseUrl = "{{ asset('') }}";
         window.onload = () => {
             document.getElementById('icon2').src = assetBaseUrl + 'Image/history-active.png'
+            document.getElementById('iconTitle2').classList.add('active');
         }
     </script>
 </body>

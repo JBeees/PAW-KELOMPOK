@@ -32,4 +32,7 @@ Route::get('/upload', function () {
 Route::get('/testing', function () {
     return view('testing');
 });
+Route::get('/nextRegister', function () {
+    return view('nextRegistrasi');
+})->name('next');;
 

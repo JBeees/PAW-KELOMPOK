@@ -104,6 +104,12 @@
             pointer-events: none;
             opacity: 30%;
         }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -121,8 +127,12 @@
                     <label>Kata Sandi</label>
                     <input style="width:350px;height:40px;font-size:25px" type="password" placeholder="Kata Sandi">
                 </div>
-                <button type="button" onclick="window.location.href='{{ route('loggedIn') }}'" class="masuk">Masuk</button>
-                <button type="button" onclick="window.location.href='{{ route('registrasi') }}'">Register</button>
+                <div class="buttons">
+                    <button type="button" onclick="window.location.href='{{ route('loggedIn') }}'"
+                        class="masuk">Masuk</button>
+                    <label style="font-size:18px;margin-top:15px;margin-bottom:0;">Belum punya akun?</label>
+                    <button type="button" onclick="window.location.href='{{ route('registrasi') }}'">Register</button>
+                </div>
             </form>
         </div>
         <div class="right">

@@ -51,7 +51,7 @@
         .nusa {
             font-size: 90px;
             margin: 0;
-            font-weight:700;
+            font-weight: 700;
             text-decoration: none;
             color: black;
         }
@@ -104,14 +104,19 @@
             pointer-events: none;
             opacity: 30%;
         }
+        .buttons{
+            display: flex;
+            flex-direction: column;
+            align-items: center ;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="login" >
+        <div class="login">
             <a href="{{ route('dashboard') }}" class="nusa">NusaFood</a>
-            <h2 class="regis">Login</h2>
+            <h2 class="regis">Register</h2>
             <form class="form">
                 <div class="loginForm">
                     <label>Email</label>
@@ -125,9 +130,12 @@
                     <label>Konfirmasi Kata Sandi</label>
                     <input style="width:350px;height:40px;font-size:25px" type="password" placeholder="Kata Sandi">
                 </div>
-                <button type="button" onclick="window.location.href='{{ route('login') }}'"
-                    class="masuk">Masuk</button>
-                <button type="button" onclick="window.location.href='{{ route('login') }}'">Login</button>
+                <div class="buttons">
+                    <button type="button" onclick="window.location.href='{{ route('next') }}'"
+                        class="masuk">Berikutnya</button>
+                    <label style="font-size:18px;margin-top:15px;margin-bottom:0;">Sudah punya akun?</label>
+                    <button type="button" onclick="window.location.href='{{ route('login') }}'">Login</button>
+                </div>
             </form>
         </div>
         <div class="right">

@@ -240,7 +240,8 @@
             });
         }
 
-        loadDaerah().catch(err => console.error(err));
+        // loadDaerah().catch(err => console.error(err));
+        document.addEventListener('DOMContentLoaded', loadDaerah);  
     </script>
 </body>
 

@@ -45,7 +45,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            font-size: 25px;
+            font-size: 20px;
         }
 
         .nusa {
@@ -82,7 +82,7 @@
             margin-top: 10px;
             background-color: red;
             color: white;
-            font-size: 25px;
+            font-size: 20px;
         }
 
         button:hover {
@@ -104,10 +104,41 @@
             pointer-events: none;
             opacity: 30%;
         }
-        .buttons{
+
+        .buttons {
             display: flex;
             flex-direction: column;
-            align-items: center ;
+            align-items: center;
+        }
+
+        .red {
+            color: red;
+        }
+
+        #errorPopUp {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #popupContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        #errorButton {
+            width: 100px;
         }
     </style>
 </head>
@@ -117,22 +148,24 @@
         <div class="login">
             <a href="{{ route('dashboard') }}" class="nusa">NusaFood</a>
             <h2 class="regis">Register</h2>
-            <form class="form">
+            <form class="form" action="{{ route('temp-store') }}" method="POST">
+                @csrf
                 <div class="loginForm">
-                    <label>Email</label>
-                    <input style="width:350px;height:40px;font-size:25px" type="email" placeholder="Email">
+                    <label>Email<span class="red">*</span></label>
+                    <input style="width:350px;height:40px;font-size:20px" type="email" name="email" placeholder="Email">
                 </div>
                 <div class="loginForm">
-                    <label>Kata Sandi</label>
-                    <input style="width:350px;height:40px;font-size:25px" type="password" placeholder="Kata Sandi">
+                    <label>Kata Sandi<span class="red">*</span></label>
+                    <input style="width:350px;height:40px;font-size:20px" type="password" name="password"
+                        placeholder="Kata Sandi">
                 </div>
                 <div class="loginForm">
-                    <label>Konfirmasi Kata Sandi</label>
-                    <input style="width:350px;height:40px;font-size:25px" type="password" placeholder="Kata Sandi">
+                    <label>Konfirmasi Kata Sandi<span class="red">*</span></label>
+                    <input style="width:350px;height:40px;font-size:20px" type="password" name="password_confirmation"
+                        placeholder="Kata Sandi">
                 </div>
                 <div class="buttons">
-                    <button type="button" onclick="window.location.href='{{ route('next') }}'"
-                        class="masuk">Berikutnya</button>
+                    <button type="submit" class="masuk">Berikutnya</button>
                     <label style="font-size:18px;margin-top:15px;margin-bottom:0;">Sudah punya akun?</label>
                     <button type="button" onclick="window.location.href='{{ route('login') }}'">Login</button>
                 </div>
@@ -143,6 +176,26 @@
             <img class="map" src="{{ asset('Image/indo_bg.png') }}">
         </div>
     </div>
+    @if ($errors->any())
+        <div id="errorPopUp">
+            <div id="popupContent">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+                <p>{{ session('error') }}</p>
+                <button id="errorButton" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+        <script>
+            var myModal = document.getElementById('errorPopUp');
+            myModal.style.display = 'flex';
+            function closePopup() {
+                myModal.style.display = 'none';
+            }
+        </script>
+    @endif
+
 </body>
 
 </html>

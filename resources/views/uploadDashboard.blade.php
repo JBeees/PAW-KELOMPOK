@@ -32,14 +32,13 @@
 
         .page {
             position: relative;
-            width: 93%;
+            width: 90%;
             margin-top: 40px;
             height: auto;
             border-top-left-radius: 50px;
             background-color: white;
             padding: 80px;
             align-self: flex-end;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .uploadData {

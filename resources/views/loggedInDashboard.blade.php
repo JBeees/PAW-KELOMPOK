@@ -32,7 +32,7 @@
 
         .page {
             position: relative;
-            width: 93%;
+            width: 90%;
             margin-top: 40px;
             height: 100vh;
             border-top-left-radius: 50px;
@@ -43,7 +43,6 @@
             justify-content: center;
             align-items: center;
             padding: 80px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .info {

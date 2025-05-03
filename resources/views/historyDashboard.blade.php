@@ -34,7 +34,11 @@
             position: relative;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             width: 90%;
+=======
+            width: 91%;
+>>>>>>> additionalBranch
 =======
             width: 91%;
 >>>>>>> additionalBranch

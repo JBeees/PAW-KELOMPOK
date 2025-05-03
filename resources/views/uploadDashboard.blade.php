@@ -32,7 +32,11 @@
 
         .page {
             position: relative;
+<<<<<<< HEAD
             width: 90%;
+=======
+            width: 91%;
+>>>>>>> additionalBranch
             margin-top: 40px;
             height: auto;
             border-top-left-radius: 50px;

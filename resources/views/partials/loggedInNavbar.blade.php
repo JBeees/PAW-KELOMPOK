@@ -1,6 +1,14 @@
 <div class="header">
     <h1>NusaFood</h1>
-    <h1>Profile</h1>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="display:flex;align-items:flex-end;flex-direction:column;">
+            <h1 class="profileInfo">{{ $sekolah->name }}</h1>
+            <h5>PJ Sekolah</h5>
+        </div>
+        <img class= "profilImg" src="{{ $sekolah->profile_image
+    ? 'data:image/jpeg;base64,' . base64_encode($sekolah->profile_image)
+    : asset('Image/profile-user.png') }}" class="rounded-circle" style="width:60px; height:60px; object-fit:cover;">
+    </div>
 </div>
 <div class="navbar">
     <img style="margin-top: 50px;margin-bottom:50px" id="icon0" src="{{ asset('Image/lines.png') }}">

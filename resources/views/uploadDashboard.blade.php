@@ -32,7 +32,7 @@
 
         .page {
             position: relative;
-            width: 93%;
+            width: 91%;
             margin-top: 40px;
             height: auto;
             border-top-left-radius: 50px;

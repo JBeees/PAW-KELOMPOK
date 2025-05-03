@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use PDO;
+use Illuminate\Support\Facades\Http;
 
 
 class RegisterController extends Controller
@@ -46,6 +46,11 @@ class RegisterController extends Controller
         $address = htmlspecialchars($request->input('address'));
         $student = htmlspecialchars($request->input('student'));
         $province = htmlspecialchars($request->input('province'));
+        $provinces = Http::get('https://raw.githubusercontent.com/Caknoooo/provinces-cities-indonesia/main/json/provinces.json')
+            ->json();
+        $match = collect($provinces)
+            ->firstWhere('id', (int) $province);
+        $provinceName = $match['province'] ?? 'Unknown';
         $city = htmlspecialchars($request->input('city'));
         $stmt = $pdo->prepare(
             'INSERT INTO school_info 
@@ -58,7 +63,7 @@ class RegisterController extends Controller
             'name' => $name,
             'phone_number' => $phone,
             'address' => $address,
-            'province' => $province,
+            'province' => $provinceName,
             'city' => $city,
             'total_student' => $student,
         ];

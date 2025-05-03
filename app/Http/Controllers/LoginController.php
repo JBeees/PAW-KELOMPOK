@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use PDO;
-
 class LoginController extends Controller
 {
-    public function loginCheck(Request $request)
+    public function showProfile(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -22,7 +20,8 @@ class LoginController extends Controller
             return back()->withErrors(['email' => 'Email not registered']);
         }
         if (Hash::check($pass, $cekEmail->password)) {
-            session(['user' => $cekEmail]);
+            session(['id' => $cekEmail->id]);
+            session(['email' => $cekEmail->email]);
             return redirect()->route('loggedIn');
         } else {
             return back()->withErrors(['password' => 'Incorrect password']);

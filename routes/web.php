@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Models\Sekolah;
 
 
 Route::get('/', function () {
@@ -24,13 +26,19 @@ Route::get('/registrasi', function () {
     return view('registrasi');
 })->name('registrasi');
 Route::get('/dashboardIn', function () {
-    return view('loggedInDashboard');
+    $id = session('id');
+    $sekolah = Sekolah::find($id);
+    return view('loggedInDashboard', compact('sekolah'));
 })->name('loggedIn');
 Route::get('/history', function () {
-    return view('historyDashboard');
+    $id = session('id');
+    $sekolah = Sekolah::find($id);
+    return view('historyDashboard', compact('sekolah'));
 })->name('historyDashboard');
 Route::get('/upload', function () {
-    return view('uploadDashboard');
+    $id = session('id');
+    $sekolah = Sekolah::find($id);
+    return view('uploadDashboard', compact('sekolah'));
 })->name('uploadDashboard');
 Route::get('/testing', function () {
     return view('testing');
@@ -40,7 +48,8 @@ Route::get('/register/second', function () {
 })->name('next');
 Route::post('/register/second', [RegisterController::class, 'dataTempStore'])->name('temp-store');
 Route::post('/login', [RegisterController::class, 'dataTempStore2'])->name('temp-store2');
-Route::post('/dashboardIn', [LoginController::class, 'loginCheck'])->name('login-check');
+Route::post('/dashboardIn', [LoginController::class, 'showProfile'])->name('login-check');
+Route::post('/dashboardInUpdate', [DashboardController::class, 'updateProfileImage'])->name('update-profile');
 
 
 

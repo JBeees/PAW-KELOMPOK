@@ -91,7 +91,10 @@
             height: 200px;
             border: 0.5px dashed black;
             border-radius: 20px;
-
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .uploadLabel {
@@ -127,6 +130,32 @@
             transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
         }
+
+        #successPopUp {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #popupContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        #successButton {
+            width: 100px;
+        }
     </style>
 </head>
 
@@ -135,99 +164,117 @@
         @include('partials.loggedInNavbar')
         <div class="page">
             <div class="uploadData">
-                <h1>Tambah Data Penerimaan Makanan</h1>
-                <hr
-                    style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
-                <div class="fillBar">
-                    <div class="gradient">
-                        <h2>Isi Data Pengirim Makanan</h2>
-                        <p style="font-size:20px;opacity:60%">Silakan lengkapi data nama dan nomor telepon dari pengirim
-                            makanan.</p>
-                        <hr
-                            style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
-                    </div>
-                    <div class="partisiForm">
-                        <label>Nama<span class="red">*</span></label>
-                        <input type="search" placeholder="Masukkan Nama Lengkap">
-                    </div>
-                    <div class="partisiForm">
-                        <label>Nomor Telepon<span class="red">*</span></label>
-                        <input type="search" placeholder="Masukkan Nomor Telepon">
-                    </div>
-                </div>
-                <div class="fillBar">
-                    <div class="gradient">
-                        <h2>Isi Waktu dan Tanggal Pengiriman Makanan</h2>
-                        <p style="font-size:20px;opacity:60%">Silakan lengkapi data waktu dan tanggal pengiriman
-                            makanan.</p>
-                        <hr
-                            style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
-                    </div>
-                    <div class="partisiForm" style="flex-direction: row; gap: 20px;">
-                        <div style="display: flex;flex-direction:column">
-                            <label>Waktu<span class="red">*</span></label>
-                            <input type="time">
+                <form action="{{ route('tambah-makanan') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <h1>Tambah Data Penerimaan Makanan</h1>
+                    <hr
+                        style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
+                    <div class="fillBar">
+                        <div class="gradient">
+                            <h2>Isi Data Pengirim Makanan</h2>
+                            <p style="font-size:20px;opacity:60%">Silakan lengkapi data nama dan nomor telepon dari
+                                pengirim
+                                makanan.</p>
+                            <hr
+                                style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
                         </div>
-                        <div style="display: flex;flex-direction:column">
-                            <label>Tanggal<span class="red">*</span></label>
-                            <input type="date">
+                        <div class="partisiForm">
+                            <label>Nama<span class="red">*</span></label>
+                            <input name="nama" type="text" placeholder="Masukkan Nama Lengkap">
+                        </div>
+                        <div class="partisiForm">
+                            <label>Nomor Telepon<span class="red">*</span></label>
+                            <input name="phone" type="tel" placeholder="Masukkan Nomor Telepon">
                         </div>
                     </div>
-                </div>
-                <div class="fillBar">
-                    <div class="gradient">
-                        <h2>Detail Makanan yang Diterima</h2>
-                        <p style="font-size:20px;opacity:60%">Silakan lengkapi data makanan yang diterima.</p>
-                        <hr
-                            style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
-                    </div>
-                    <div class="partisiForm" style="flex-direction: row; gap: 20px;">
-                        <div style="display: flex;flex-direction:column">
-                            <label>Porsi yang diterima<span class="red">*</span></label>
-                            <input type="number">
+                    <div class="fillBar">
+                        <div class="gradient">
+                            <h2>Isi Waktu dan Tanggal Pengiriman Makanan</h2>
+                            <p style="font-size:20px;opacity:60%">Silakan lengkapi data waktu dan tanggal pengiriman
+                                makanan.</p>
+                            <hr
+                                style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
                         </div>
-                        <div style="display: flex;flex-direction:column">
-                            <label>Jumlah siswa yang menerima<span class="red">*</span></label>
-                            <input type="number">
-                        </div>
-                        <div style="display: flex;flex-direction:column">
-                            <label>Jumlah kualitas makanan bagus<span class="red">*</span></label>
-                            <input type="number">
-                        </div>
-                        <div style="display: flex;flex-direction:column">
-                            <label>Jumlah kualitas makanan buruk<span class="red">*</span></label>
-                            <input type="number">
+                        <div class="partisiForm" style="flex-direction: row; gap: 20px;">
+                            <div style="display: flex;flex-direction:column">
+                                <label>Waktu<span class="red">*</span></label>
+                                <input name="time" type="time">
+                            </div>
+                            <div style="display: flex;flex-direction:column">
+                                <label>Tanggal<span class="red">*</span></label>
+                                <input name="date" type="date">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="fillBar">
-                    <div class="gradient">
-                        <h2>Unggah Foto Dokumentasi</h2>
-                        <p style="font-size:20px;opacity:60%">Upload foto bukti dokumentasi program makanan bergizi.</p>
-                        <hr
-                            style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
-                    </div>
-                    <div class="partisiForm" style="flex-direction: column; gap: 20px;">
-                        <label>Bukti<span class="red">*</span></label>
-                        <div class="upload" style="display: flex;flex-direction:column">
-                            <label for="dokum" class="uploadLabel">Upload foto disini</label>
-                            <input type="file" id="dokum" hidden>
+                    <div class="fillBar">
+                        <div class="gradient">
+                            <h2>Detail Makanan yang Diterima</h2>
+                            <p style="font-size:20px;opacity:60%">Silakan lengkapi data makanan yang diterima.</p>
+                            <hr
+                                style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
+                        </div>
+                        <div class="partisiForm" style="flex-direction: row; gap: 20px;">
+                            <div style="display: flex;flex-direction:column">
+                                <label>Porsi yang diterima<span class="red">*</span></label>
+                                <input name="porsi" type="number">
+                            </div>
+                            <div style="display: flex;flex-direction:column">
+                                <label>Jumlah siswa yang menerima<span class="red">*</span></label>
+                                <input name="siswa" type="number">
+                            </div>
+                            <div style="display: flex;flex-direction:column">
+                                <label>Jumlah kualitas makanan bagus<span class="red">*</span></label>
+                                <input name="bagus" type="number">
+                            </div>
+                            <div style="display: flex;flex-direction:column">
+                                <label>Jumlah kualitas makanan buruk<span class="red">*</span></label>
+                                <input name="buruk" type="number">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="fillBar">
-                    <div class="gradient">
-                        <h2>Catatan</h2>
-                        <p style="font-size:20px;opacity:60%">Tambah catatan tentang program ini.</p>
-                        <hr
-                            style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
+                    <div class="fillBar">
+                        <div class="gradient">
+                            <h2>Unggah Foto Dokumentasi</h2>
+                            <p style="font-size:20px;opacity:60%">
+                                Upload foto bukti dokumentasi program makanan bergizi.
+                            </p>
+                            <hr
+                                style="height: 2px; background-color: black; border: none; width: 100%; opacity: 20%; margin-top:10px; margin-bottom:20px">
+                        </div>
+
+                        <div class="partisiForm" style="flex-direction: column; gap: 20px;">
+                            <label>Bukti<span class="red">*</span></label>
+                            <div class="upload">
+                                <label for="dokum" class="uploadLabel" id="uploadLabel"
+                                    style="cursor: pointer; padding: 10px; border-radius: 5px;">
+                                    📁 Upload foto disini
+                                </label>
+
+                                <input name="dokum" type="file" id="dokum" accept="image/*" hidden>
+                                <label for="dokum" id="previewWrapper" style="display: none; cursor: pointer;">
+                                    <img id="dokumPreview"
+                                        style="max-width: 100px; border: 1px solid #ccc; border-radius: 5px;"
+                                        alt="Preview foto dokumentasi">
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="partisiForm" style="flex-direction: column; gap: 20px;">
-                        <label>Catatan<span class="red">*</span></label>
-                        <input style="width:800px;height:100px" type="text" placeholder="Tuliskan catatan disini">
+                    <div class="fillBar">
+                        <div class="gradient">
+                            <h2>Catatan</h2>
+                            <p style="font-size:20px;opacity:60%">Tambah catatan tentang program ini.</p>
+                            <hr
+                                style="height: 2px; background-color: black; border: none; width: 100%;opacity: 20%;margin-top:10px;margin-bottom:20px">
+                        </div>
+                        <div class="partisiForm" style="flex-direction: column; gap: 20px;">
+                            <label>Catatan</label>
+                            <textarea name="catatan" rows="4"
+                                style="width:800px;height:100px;border-radius:10px;padding;20px;font-size:20px"
+                                placeholder="Tuliskan catatan disini"></textarea>
+                        </div>
                     </div>
-                </div>
-                <button id="submit">Submit</button>
+                    <button id="submit" type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -237,7 +284,47 @@
             document.getElementById('icon3').src = assetBaseUrl + 'Image/upload-active.png'
             document.getElementById('iconTitle3').classList.add('active');
         }
+        const dokumInput = document.getElementById('dokum');
+        const uploadLabel = document.getElementById('uploadLabel');
+        const previewWrapper = document.getElementById('previewWrapper');
+        const previewImg = document.getElementById('dokumPreview');
+
+        dokumInput.addEventListener('click', function () {
+            this.value = null;
+        });
+
+        dokumInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (!file) {
+                previewImg.style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                previewImg.src = e.target.result;
+                previewWrapper.style.display = 'inline-block';
+                uploadLabel.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        });
     </script>
+    @if (session('success'))
+        <div id="successPopUp">
+            <div id="popupContent">
+                <p>{{ session('success') }}</p>
+                <button id="successButton" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+        <script>
+            var myModal = document.getElementById('successPopUp');
+            myModal.style.display = 'flex';
+            function closePopup() {
+                myModal.style.display = 'none';
+            }
+        </script>
+    @endif
 </body>
 
 </html>

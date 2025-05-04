@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\FoodInfo;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UploadMakananController;
 use App\Models\Sekolah;
 
 
@@ -33,7 +35,8 @@ Route::get('/dashboardIn', function () {
 Route::get('/history', function () {
     $id = session('id');
     $sekolah = Sekolah::find($id);
-    return view('historyDashboard', compact('sekolah'));
+    $food = FoodInfo::where('id_sekolah', $id)->get();
+    return view('historyDashboard', compact('sekolah', 'food'));
 })->name('historyDashboard');
 Route::get('/upload', function () {
     $id = session('id');
@@ -50,6 +53,8 @@ Route::post('/register/second', [RegisterController::class, 'dataTempStore'])->n
 Route::post('/login', [RegisterController::class, 'dataTempStore2'])->name('temp-store2');
 Route::post('/dashboardIn', [LoginController::class, 'showProfile'])->name('login-check');
 Route::post('/dashboardInUpdate', [DashboardController::class, 'updateProfileImage'])->name('update-profile');
+Route::put('/dashboard/update-data', [DashboardController::class, 'updateData'])->name('updateData');
+Route::post('/upload/tambah-makanan', [UploadMakananController::class, 'tambahMakanan'])->name('tambah-makanan');
 
 
 

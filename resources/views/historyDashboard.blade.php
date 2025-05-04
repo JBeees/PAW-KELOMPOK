@@ -80,6 +80,75 @@
             border: 0.1px solid black;
             border-radius: 20px;
         }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .data-table thead tr:first-child th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        .data-table thead tr:first-child th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        .data-table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 15px;
+        }
+
+        .data-table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 15px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 18px 74px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: red;
+            color: white;
+            font-weight: bold;
+        }
+
+        .data-table tr:hover {
+            background-color: rgba(128, 128, 128, 0.3);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            font-size: 25px;
+            border-radius: 10px;
+        }
+
+        .detailButton {
+            width: 100px;
+            height: 30px;
+            background: none;
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .detailButton:hover {
+            background-color: black;
+            cursor: pointer;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
     </style>
 </head>
 
@@ -104,6 +173,32 @@
                 <div class="box"></div>
                 <div class="box"></div>
                 <div class="box"></div>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Nama Pengirim</th>
+                            <th>Waktu</th>
+                            <th>Tanggal</th>
+                            <th>Jumlah Porsi</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($food as $f)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $f->nama_pengirim }}</td>
+                                <td>{{ $f->waktu }}</td>
+                                <td>{{ $f->tanggal }}</td>
+                                <td>{{ $f->jumlah_porsi }}</td>
+                                <td><button class="detailButton">Detail</button></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

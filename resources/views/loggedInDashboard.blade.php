@@ -71,11 +71,14 @@
 
         .detailSchool {
             background-color: #fff;
+            width: 50%;
+            height: 90%;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 20px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             font-size: 40px;
-            line-height: 1.6;
+            margin-left: 0;
+            gap: 20px;
         }
 
         .image-upload-wrapper {
@@ -112,6 +115,70 @@
         .image-upload-wrapper:hover .hover-overlay {
             opacity: 1;
         }
+
+        .infoTable {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        #edit,
+        #submit {
+            width: 200px;
+            height: 50px;
+            margin-top: 30px;
+            background: none;
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease,
+                box-shadow 0.3s ease;
+        }
+
+        #edit:hover,
+        #submit:hover {
+            background-color: black;
+            cursor: pointer;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .inputEdit {
+            border-radius: 10px;
+            font-size: 20px;
+            padding: 10px
+        }
+        #successPopUp {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #popupContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;   
+        }
+
+        #successButton {
+            width: 100px;
+        }
     </style>
 </head>
 
@@ -136,10 +203,36 @@
                     <h1>{{ $sekolah->name }}</h1>
                 </div>
                 <div class="detailSchool">
-                    <p><strong>Nomor HP:</strong> {{ $sekolah->phone_number}}</p>
-                    <p><strong>Alamat:</strong> {{ $sekolah->address }}</p>
-                    <p><strong>Provinsi:</strong> {{ $sekolah->province }}</p>
-                    <p><strong>Kota:</strong> {{ $sekolah->city }}</p>
+                    <form action="{{ route('updateData') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="infoTable">
+                            <strong>Nomor HP:</strong>
+                            <p id="phoneData">{{ $sekolah->phone_number }}</p>
+                            <input name="phone" id="phoneEdit" class="inputEdit" type="text"
+                                placeholder="Update Nomor HP" style="display:none">
+                        </div>
+                        <div class="infoTable">
+                            <strong>Alamat:</strong>
+                            <p id="addressData">{{ $sekolah->address }}</p>
+                            <input name="address" id="addressEdit" class="inputEdit" type="text"
+                                placeholder="Update Alamat" style="display:none">
+                        </div>
+                        <div class="infoTable">
+                            <strong>Provinsi:</strong>
+                            <p id="provinceData">{{ $sekolah->province }}</p>
+                            <input name="province" id="provinceEdit" class="inputEdit" type="text"
+                                placeholder="Update Provinsi" style="display:none">
+                        </div>
+                        <div class="infoTable">
+                            <strong>Kota:</strong>
+                            <p id="cityData">{{ $sekolah->city }}</p>
+                            <input name="city" id="cityEdit" class="inputEdit" type="text" placeholder="Update Kota"
+                                style="display:none">
+                        </div>
+                        <button type="button" id="edit" onclick="updateData()">EDIT</button>
+                        <button type="submit" id="submit" onclick="updateData()" style="display:none;">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -150,7 +243,34 @@
             document.getElementById('icon1').src = assetBaseUrl + 'Image/house-active.png'
             document.getElementById('iconTitle1').classList.add('active');
         }
+        let flipEdit = false;
+        function updateData() {
+            flipEdit = !flipEdit;
+            const data = ['phone', 'address', 'province', 'city'];
+            data.forEach(d => {
+                document.getElementById(d + "Data").style.display = flipEdit ? 'none' : 'block';
+                document.getElementById(d + "Edit").style.display = flipEdit ? 'block' : 'none';
+            });
+            document.getElementById("submit").style.display = flipEdit ? 'block' : 'none';
+            document.getElementById("edit").style.display = flipEdit ? 'none' : 'block';
+        }
     </script>
+    @if (session('success'))
+        <div id="successPopUp">
+            <div id="popupContent">
+                <p>{{ session('success') }}</p>
+                <button id="successButton" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+        <script>
+            var myModal = document.getElementById('successPopUp');
+            myModal.style.display = 'flex';
+            function closePopup() {
+                myModal.style.display = 'none';
+            }
+        </script>
+    @endif
 </body>
 
 </html>

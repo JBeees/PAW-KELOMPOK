@@ -24,17 +24,83 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            height: auto;
             width: 100%;
             background-color: red;
             overflow-y: auto;
+        }
+
+        .information {
+            width: 100%;
+            height: 80vh;
+            border-radius: 20px;
+            margin-top: 50px;
+            gap: 30px;
+            padding: 50px;
+        }
+
+        .infoUmum {
+            width: 60%;
+            height: 70vh;
+            border: 0.01px solid rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 30px;
+        }
+
+        .groupOfInfo {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-radius: 20px;
+        }
+
+        .bagianAtas {
+            margin-top: 30px;
+            width: 100%;
+            height: 80%;
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+
+        .note {
+            width: 100%;
+            height: 30%;
+        }
+
+        #bagianInfo {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .groupOfBox {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .bukti {
+            width: 100%;
+            height: 60%;
+            border: 0.01px solid rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
         }
 
         .page {
             position: relative;
             width: 91%;
             margin-top: 40px;
-            height: 100vh;
+            height: auto;
             border-top-left-radius: 50px;
             background-color: white;
             align-self: flex-end;
@@ -74,9 +140,9 @@
         }
 
         .box {
-            width: 400px;
-            height: 100px;
-            border: 0.1px solid black;
+            width: 100%;
+            height: 110px;
+            border: 0.01px solid rgba(0, 0, 0, 0.2);
             border-radius: 20px;
         }
 
@@ -84,7 +150,6 @@
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            font-family: 'Arial', sans-serif;
         }
 
         .data-table thead tr:first-child th:first-child {
@@ -105,7 +170,7 @@
 
         .data-table th,
         .data-table td {
-            padding: 18px 74px;
+            padding: 18px 70px;
             border: 1px solid #ddd;
             text-align: left;
         }
@@ -121,12 +186,12 @@
         }
 
         .table-container {
-            overflow-x: auto;
             font-size: 25px;
             border-radius: 10px;
         }
 
-        .detailButton {
+        .detailButton,
+        .backButton {
             width: 100px;
             height: 30px;
             background: none;
@@ -142,11 +207,16 @@
                 box-shadow 0.3s ease;
         }
 
-        .detailButton:hover {
+        .detailButton:hover,
+        .backButton:hover {
             background-color: black;
             cursor: pointer;
             transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .red {
+            color: red;
         }
     </style>
 </head>
@@ -154,52 +224,7 @@
 <body>
     <div class="container">
         @include('partials.loggedInNavbar')
-        <div class="page">
-            <h1>Daftar Laporan</h1>
-            <div class="searchBar">
-                <div class="bar">
-                    <label>Pencarian</label>
-                    <input style="width:300px;height:40px;font-size:20px;border-radius:10px;" type="search"
-                        placeholder="Masukkan Kata Kunci">
-                </div>
-                <div class="bar">
-                    <label>Tanggal</label>
-                    <input style="width: 200px;height:40px;font-size:20px;border-radius:10px;x" type="date"
-                        placeholder="Provinsi">
-                </div>
-            </div>
-            <div class="info">
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-            </div>
-            <div class="table-container">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Nama Pengirim</th>
-                            <th>Waktu</th>
-                            <th>Tanggal</th>
-                            <th>Jumlah Porsi</th>
-                            <th>Detail</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($food as $f)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $f->nama_pengirim }}</td>
-                                <td>{{ $f->waktu }}</td>
-                                <td>{{ $f->tanggal }}</td>
-                                <td>{{ $f->jumlah_porsi }}</td>
-                                <td><button class="detailButton">Detail</button></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        @yield('content')
     </div>
     <script>
         const assetBaseUrl = "{{ asset('') }}";

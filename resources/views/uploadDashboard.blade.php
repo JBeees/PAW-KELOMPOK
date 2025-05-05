@@ -37,8 +37,8 @@
             height: auto;
             border-top-left-radius: 50px;
             background-color: white;
-            padding: 80px;
             align-self: flex-end;
+            padding: 80px;
         }
 
         .uploadData {

@@ -25,7 +25,7 @@ class UploadMakananController extends Controller
         $binaryImage = file_get_contents($file->getRealPath());
 
         $insert = [
-            'id'=>session('id'),
+            'id_sekolah'=>session('id'),
             'nama_pengirim' => $data['nama'],
             'phone_number' => $data['phone'],
             'waktu' => $data['time'],

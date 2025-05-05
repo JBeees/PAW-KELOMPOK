@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UploadMakananController;
+use App\Http\Controllers\HistoryController;
 use App\Models\Sekolah;
 
 
@@ -36,7 +37,7 @@ Route::get('/history', function () {
     $id = session('id');
     $sekolah = Sekolah::find($id);
     $food = FoodInfo::where('id_sekolah', $id)->get();
-    return view('historyDashboard', compact('sekolah', 'food'));
+    return view('historyListInfo', compact('sekolah', 'food'));
 })->name('historyDashboard');
 Route::get('/upload', function () {
     $id = session('id');
@@ -55,6 +56,7 @@ Route::post('/dashboardIn', [LoginController::class, 'showProfile'])->name('logi
 Route::post('/dashboardInUpdate', [DashboardController::class, 'updateProfileImage'])->name('update-profile');
 Route::put('/dashboard/update-data', [DashboardController::class, 'updateData'])->name('updateData');
 Route::post('/upload/tambah-makanan', [UploadMakananController::class, 'tambahMakanan'])->name('tambah-makanan');
+Route::get('/history/detail-info/{id}', [HistoryController::class, 'showDetail'])->name('detail-info');
 
 
 

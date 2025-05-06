@@ -94,6 +94,10 @@
             border: 0.01px solid rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .page {

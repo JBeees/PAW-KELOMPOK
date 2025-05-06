@@ -75,7 +75,7 @@
                             class="box">
                             <div class="circle"
                                 style="width:150px;height:150px; border-radius:50%;background:conic-gradient(red 0% {{ $percentAccept }}%,
-                                                     white {{ $percentAccept }}% 100%);display:flex;align-items:center;justify-content:center;position:relative;">
+                                                                     white {{ $percentAccept }}% 100%);display:flex;align-items:center;justify-content:center;position:relative;">
                                 <div class="inner-circle"
                                     style="width:100px;height:100px;background:white; border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;">
                                     <h1 style="font-size:40px; margin:0;">
@@ -89,11 +89,10 @@
 
                 </div>
                 <div class="bukti">
-                    <div class="infoBukti">
-                        <h2>Dokumentasi</h2>
-                    </div> <img src="{{ $food->dokumentasi
+                    <h2 style="align-self: flex-start;">Dokumentasi</h2>
+                    <img src="{{ $food->dokumentasi
         ? 'data:image/jpeg;base64,' . base64_encode($food->dokumentasi)
-        : asset('Image/profile-user-grey.png') }}" style="width: 50%;">
+        : asset('Image/profile-user-grey.png') }}" style="width: 40%;">
                 </div>
             </div>
         </div>
@@ -101,18 +100,19 @@
             <button style="width:150px;height:40px" class="button" onclick="showPopUp()">Hapus Data</button>
             <button style="width:150px;height:40px" class="button">Edit Data</button>
         </div>
-        <div id="deletePopUp">
-            <div id="popupContent">
-                <p style="font-size: 20px;">Data akan terhapus!!</p>
-                <div style="display: flex;flex-direction:row;justify-content:center;gap:10px;">
-                    <form action="{{ route('delete-data', $food->id_makanan) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="button">Delete</button>
-                    </form>
-                    <button id="askButton" class="button" onclick="closePopUp()">Tidak</button>
-                </div>
+    </div>
+    <div id="deletePopUp">
+        <div id="popupContent">
+            <p style="font-size: 20px;">Data akan terhapus!!</p>
+            <div style="display: flex;flex-direction:row;justify-content:center;gap:10px;">
+                <form action="{{ route('delete-data', $food->id_makanan) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="button">Delete</button>
+                </form>
+                <button id="askButton" class="button" onclick="closePopUp()">Tidak</button>
             </div>
         </div>
+    </div>
     </div>
 @endsection

@@ -111,22 +111,17 @@
             gap: 40px;
         }
 
-        .navbarOverlay a {
+        #tombolInfoUmum,
+        #tombolSekolah {
             padding-left: 10px;
             padding-right: 10px;
         }
 
-        .navbarOverlay a:hover {
+        #tombolInfoUmum:hover,
+        #tombolSekolah:hover {
             background-color: red;
             color: white;
             border-radius: 10px;
-        }
-
-        .navbarOverlay>a.active {
-            background-color: red;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
             cursor: pointer;
         }
 
@@ -149,6 +144,15 @@
             justify-content: space-evenly;
         }
 
+        #overlay1 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
         .boxInfo {
             width: 100%;
             height: 35%;
@@ -160,8 +164,97 @@
             border-radius: 10px;
         }
 
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead tr:first-child th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        .data-table thead tr:first-child th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        .data-table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 15px;
+        }
+
+        .data-table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 15px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 18px 50px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: red;
+            color: white;
+            font-weight: bold;
+        }
+
+        .data-table tr:hover {
+            background-color: rgba(128, 128, 128, 0.3);
+        }
+
+        .table-container {
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
         .red {
             color: red;
+        }
+
+        .black {
+            color: black;
+        }
+
+        #overlay2 {
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info2 {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: ce
+        }
+
+        .button {
+            width: 100px;
+            height: 30px;
+            background: none;
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: black;
+            cursor: pointer;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
         }
     </style>
 </head>
@@ -202,47 +295,67 @@
         </div>
     </div>
     <div id="miniOverlay">
-        <span class="close-btn"
-            onclick="document.getElementById('miniOverlay').style.display='none', document.getElementById('container').classList.remove('blur');">×</span>
+        <span class="close-btn" id="close-btn">×</span>
         <div class="configOverlay">
             <h1 style="font-size: 40px;padding:10px;" id="provinceName">Province</h1>
             <div class="navbarOverlay">
-                <a id="overlay">Info Umum</a>
-                <a id="overlay">Sekolah Penerima</a>
+                <a id="tombolInfoUmum">Info Umum</a>
+                <a id="tombolSekolah">Sekolah Penerima</a>
             </div>
-            <img src="{{ asset('Image/student.png') }}" style="width:50%;" alt="">
-            <div id="overlayContent">
-                <div class="leftOverlay" id="overlayPart">
-                    <div class="boxInfo">
-                        <img src="{{ asset('Image/graduation.png') }}">
-                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
-                            <p style="font-size: 20px;">Total Sekolah Penerima</p>
-                            <p id="total_sekolah"></p>
+            <div id="overlay1">
+                <img src="{{ asset('Image/student.png') }}" style="width:50%;" alt="">
+                <div id="overlayContent">
+                    <div class="leftOverlay" id="overlayPart">
+                        <div class="boxInfo">
+                            <img src="{{ asset('Image/graduation.png') }}">
+                            <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                                <p style="font-size: 20px;">Total Sekolah Penerima</p>
+                                <p id="total_sekolah"></p>
+                            </div>
+                        </div>
+                        <div class="boxInfo">
+                            <img src="{{ asset('Image/hand-shake.png') }}">
+                            <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                                <p style="font-size: 20px;">Persentase Penerimaan </p>
+                                <p>Example</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="boxInfo">
-                        <img src="{{ asset('Image/hand-shake.png') }}">
-                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
-                            <p style="font-size: 20px;">Persentase Penerimaan </p>
-                            <p>Example</p>
+                    <div class="rightOverlay" id="overlayPart">
+                        <div class="boxInfo">
+                            <img src="{{ asset('Image/truck.png') }}">
+                            <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                                <p style="font-size: 20px;">Total Porsi Terkirim </p>
+                                <p id="total_porsi"></p>
+                            </div>
+                        </div>
+                        <div class="boxInfo">
+                            <img src="{{ asset('Image/people.png') }}">
+                            <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                                <p style="font-size: 20px;">Total Siswa Penerima</p>
+                                <p id="total_siswa"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="rightOverlay" id="overlayPart">
-                    <div class="boxInfo">
-                        <img src="{{ asset('Image/truck.png') }}">
-                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
-                            <p style="font-size: 20px;">Total Porsi Terkirim </p>
-                            <p id="total_porsi"></p>
-
-                        </div>
+            </div>
+            <div id="overlay2">
+                <div class="info2">
+                    <div class="tableSearch">
+                        <div></div>
+                        <div></div>
                     </div>
-                    <div class="boxInfo">
-                        <img src="{{ asset('Image/people.png') }}">
-                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
-                            <p style="font-size: 20px;">Total Siswa Penerima</p>
-                            <p id="total_siswa"></p>
-                        </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="padding:20px">No.</th>
+                                    <th>Nama Sekolah</th>
+                                    <th>Info</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rows"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -253,19 +366,21 @@
         async function getProvince(lat, lng) {
             const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=5&addressdetails=1&accept-language=id`;
             const res = await fetch(url, {
-                headers: { 'User-Agent': 'YourAppName/1.0' }, 'Accept-Language': 'id'
+                headers: { 'User-Agent': 'YourAppName/1.0' },
+                'Accept-Language': 'id'
             });
             if (!res.ok) throw new Error('Failed to fetch geocode');
             const data = await res.json();
             return data.address.state || data.address.region || 'Unknown Province';
         }
-
         function switchOverlay(provinceName) {
             document.getElementById('miniOverlay').style.display = 'flex';
             document.getElementById('container').classList.add('blur');
             document.getElementById('provinceName').innerText = provinceName;
         }
+
         window.addEventListener('load', () => {
+            let lastProvince = null;
             const indonesiaSW = [-11.0, 95.0];
             const indonesiaNE = [6.0, 141.0];
             const map = L.map('map', {
@@ -285,26 +400,78 @@
                 noWrap: true
             }).addTo(map);
             map.on('click', async e => {
+                document.getElementById('tombolInfoUmum').classList.add('red');
                 try {
-                    const province = await getProvince(e.latlng.lat, e.latlng.lng);
-                    const response = await fetch(`/api/province-data?name=${encodeURIComponent(province)}`);
+                    lastProvince = await getProvince(e.latlng.lat, e.latlng.lng);
+                    const response = await fetch(
+                        `/api/province-data?name=${encodeURIComponent(lastProvince)}`
+                    );
                     const data = await response.json();
-
                     document.getElementById('total_sekolah').innerText = data.total_prov.total_sekolah_prov;
                     document.getElementById('total_porsi').innerText = data.total_prov.total_porsi_prov;
                     document.getElementById('total_siswa').innerText = data.total_prov.total_siswa_prov;
-
-                    switchOverlay(province);
+                    switchOverlay(lastProvince);
                 } catch (err) {
                     console.error(err);
                     switchOverlay('Unknown Province');
                 }
             });
-
+            const tombolSekolah = document.getElementById('tombolSekolah');
+            tombolSekolah.addEventListener('click', async function (event) {
+                event.preventDefault();
+                try {
+                    const response = await fetch(
+                        `/api/province-data?name=${encodeURIComponent(lastProvince)}`
+                    );
+                    const data = await response.json();
+                    document.getElementById('overlay1').style.display = 'none';
+                    document.getElementById('overlay2').style.display = 'flex';
+                    tombolSekolah.classList.remove('black');
+                    tombolSekolah.classList.add('red');
+                    document.getElementById('tombolInfoUmum').classList.remove('red');
+                    document.getElementById('tombolInfoUmum').classList.add('black');
+                    const tbody = document.getElementById('rows');
+                    tbody.innerHTML = '';
+                    data.school.forEach((f, i) => {
+                        tbody.innerHTML += `
+    <tr>
+      <td style="padding:20px">${i + 1}</td>
+      <td>${f}</td>
+      <td>
+        <button
+          class="button">Detail</button>
+      </td>
+    </tr>
+  `;
+                    });
+                } catch (err) {
+                    console.error('Error fetching school data:', err);
+                }
+            });
+            const tombolInfoUmum = document.getElementById('tombolInfoUmum');
+            tombolInfoUmum.addEventListener('click', async function (event) {
+                event.preventDefault();
+                getBackInfoUmum();
+            });
+            function getBackInfoUmum() {
+                document.getElementById('overlay1').style.display = 'flex';
+                document.getElementById('overlay2').style.display = 'none';
+                tombolInfoUmum.classList.remove('black');
+                tombolInfoUmum.classList.add('red');
+                document.getElementById('tombolSekolah').classList.remove('red');
+                document.getElementById('tombolSekolah').classList.add('black');
+            }
+            const closeButton = document.getElementById('close-btn');
+            closeButton.addEventListener('click', async function (event) {
+                event.preventDefault();
+                getBackInfoUmum();
+                document.getElementById('miniOverlay').style.display = 'none', document.getElementById('container').classList.remove('blur');
+            });
             window.addEventListener('resize', () => map.invalidateSize());
             setTimeout(() => map.invalidateSize(), 200);
         });
     </script>
+
 
 </body>
 

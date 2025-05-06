@@ -17,9 +17,10 @@ class ProvinceController extends Controller
             'total_siswa_prov' => Sekolah::where('province', $nama_provinsi)->sum('total_student'),
             'total_porsi_prov' => FoodInfo::whereIn('id_sekolah', $schoolIds)->sum('jumlah_porsi'),
         ];
-
+        $schoolName = Sekolah::where('province', $nama_provinsi)->pluck('name');
         return response()->json([
-            'total_prov' => $total_prov
+            'total_prov' => $total_prov,
+            'school' => $schoolName
         ]);
     }
 }

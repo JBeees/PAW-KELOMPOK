@@ -39,7 +39,7 @@
                             <td>{{ $f->waktu }}</td>
                             <td>{{ $f->tanggal }}</td>
                             <td>{{ $f->jumlah_porsi }}</td>
-                            <td><button onclick="window.location.href='{{ route('detail-info',$f->id_makanan) }}'" class="detailButton">Detail</button></td>
+                            <td><button onclick="window.location.href='{{ route('detail-info',$f->id_makanan) }}'" class="button">Detail</button></td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -76,26 +76,25 @@
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             display: none;
+            flex-direction: column;
             z-index: 9999;
             padding: 20px;
             transition: all 0.3s ease;
         }
 
-        #miniOverlay .close-btn {
+        .close-btn {
+            width: 100%;
             align-self: flex-start;
             cursor: pointer;
             font-size: 50px;
-            margin-top: -10px;
-            margin-right: -10px;
-            padding: 5px;
         }
 
         .configOverlay {
             display: flex;
-            width: 90%;
-            height: 90%;
+            width: 100%;
+            height: 100%;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
         }
 
@@ -108,6 +107,7 @@
             font-size: 20px;
             display: flex;
             justify-content: space-between;
+            margin-bottom: 30px;
             gap: 40px;
         }
 
@@ -122,39 +122,46 @@
             border-radius: 10px;
         }
 
-        .infoOverlay {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .infoOverlay1,
-        .infoOverlay2 {
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .info {
-            width: 200px;
-            height: 90px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .navbarOverlay > a.active {
+        .navbarOverlay>a.active {
             background-color: red;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+        #overlayContent {
+            width: 100%;
+            height: 100%;
+            margin-top: 30px;
+            gap: 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #overlayPart {
+            width: 50%;
+            height: 100%;
+            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .boxInfo {
+            width: 100%;
+            height: 35%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .red {
+            color: red;
         }
     </style>
 </head>
@@ -168,7 +175,7 @@
                 <img style="padding-left: 10px;" src="{{ asset('Image/graduation.png') }}">
                 <div style="display: flex;flex-direction: column; padding-left:20px ;">
                     <p style="font-size: 20px;">Total Sekolah Penerima</p>
-                    <p>Example</p>
+                    <p>{{ $total_id['total_sekolah_id'] }}</p>
                 </div>
             </div>
             <div>
@@ -182,14 +189,14 @@
                 <img style="padding-left: 10px;" src="{{ asset('Image/truck.png') }}">
                 <div style="display: flex;flex-direction: column; padding-left:20px ;">
                     <p style="font-size: 20px;">Total Porsi Terkirim </p>
-                    <p>Example</p>
+                    <p>{{ $total_id['total_porsi_id'] }}</p>
                 </div>
             </div>
             <div>
                 <img style="padding-left: 10px;" src="{{ asset('Image/people.png') }}">
                 <div style="display: flex;flex-direction: column; padding-left:20px ;">
                     <p style="font-size: 20px;">Total Siswa Penerima</p>
-                    <p>Example</p>
+                    <p>{{ $total_id['total_siswa_id'] }}</p>
                 </div>
             </div>
         </div>
@@ -198,130 +205,107 @@
         <span class="close-btn"
             onclick="document.getElementById('miniOverlay').style.display='none', document.getElementById('container').classList.remove('blur');">×</span>
         <div class="configOverlay">
-            <h1 style="font-size: 50px;padding:25px;">Province</h1>
+            <h1 style="font-size: 40px;padding:10px;" id="provinceName">Province</h1>
             <div class="navbarOverlay">
-                <a id="overlay" data-page="page1">Info Umum</a>
-                <a id="overlay" data-page="page2">Sekolah Penerima</a>
-                <a id="overlay" data-page="page3">Statistik Gizi</a>
+                <a id="overlay">Info Umum</a>
+                <a id="overlay">Sekolah Penerima</a>
             </div>
-            <div id="overlayContent"></div>
+            <img src="{{ asset('Image/student.png') }}" style="width:50%;" alt="">
+            <div id="overlayContent">
+                <div class="leftOverlay" id="overlayPart">
+                    <div class="boxInfo">
+                        <img src="{{ asset('Image/graduation.png') }}">
+                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                            <p style="font-size: 20px;">Total Sekolah Penerima</p>
+                            <p id="total_sekolah"></p>
+                        </div>
+                    </div>
+                    <div class="boxInfo">
+                        <img src="{{ asset('Image/hand-shake.png') }}">
+                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                            <p style="font-size: 20px;">Persentase Penerimaan </p>
+                            <p>Example</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightOverlay" id="overlayPart">
+                    <div class="boxInfo">
+                        <img src="{{ asset('Image/truck.png') }}">
+                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                            <p style="font-size: 20px;">Total Porsi Terkirim </p>
+                            <p id="total_porsi"></p>
+
+                        </div>
+                    </div>
+                    <div class="boxInfo">
+                        <img src="{{ asset('Image/people.png') }}">
+                        <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                            <p style="font-size: 20px;">Total Siswa Penerima</p>
+                            <p id="total_siswa"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
-        function switchOverlay(pageKey) {
-            const html = overlays[pageKey];
-            if (!html) {
-                console.error("No overlay found for", pageKey);
-                return;
-            }
-            document.getElementById('overlayContent').innerHTML = html;
+        async function getProvince(lat, lng) {
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=5&addressdetails=1&accept-language=id`;
+            const res = await fetch(url, {
+                headers: { 'User-Agent': 'YourAppName/1.0' }, 'Accept-Language': 'id'
+            });
+            if (!res.ok) throw new Error('Failed to fetch geocode');
+            const data = await res.json();
+            return data.address.state || data.address.region || 'Unknown Province';
+        }
+
+        function switchOverlay(provinceName) {
             document.getElementById('miniOverlay').style.display = 'flex';
             document.getElementById('container').classList.add('blur');
+            document.getElementById('provinceName').innerText = provinceName;
         }
-        const overlays = {
-            page1: `<img style="width: 100%;padding:20px;" src="indo_bg.png">
-            <div style="width: 90%; height: 400px;" class="infoOverlay">
-                <div class="infoOverlay1">
-                    <div class="info">
-                        <img src="graduation.png">
-                        <div>
-                            <p>Total Sekolah Penerima</p>
-                            <p>Example</p>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <img src="hand-shake.png">
-                        <div>
-                            <p>Persentase Penerimaan</p>
-                            <p>Example</p>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <img src="building.png">
-                        <div>
-                            <p>Anggaran Daerah</p>
-                            <p>Example</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="infoOverlay2">
-                    <div class="info">
-                        <img src="people.png">
-                        <div>
-                            <p>Total Siswa Penerima</p>
-                            <p>Example</p>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <img src="truck.png">
-                        <div>
-                            <p>Total Porsi Terkirim</p>
-                            <p>Example</p>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <img src="cooking.png">
-                        <div>
-                            <p>Total Unit Pelayanan</p>
-                            <p>Example</p>
-                        </div>
-                    </div>
-                </div>
-            </div>`,
-            page2: `<h1>Overlay 2</h1> <a data-page="page4">Sekolah</a>`,
-            page3: `<h1>Overlay 3</h1>`,
-            page4: `<h1>Overlay 4</h1>`,
-            page5: `<h1>Overlay 5</h1>`,
-            page6: `<h1>Overlay 6</h1>`
-        };
-        const buttons = document.querySelectorAll('a[data-page]');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', e => {
-                const page = e.currentTarget.getAttribute('data-page');
-                switchOverlay(page);
-
-                buttons.forEach(b => b.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-            });
-        });
-        const overlayEl = document.getElementById('overlay');
-        const newLinks = overlayEl.querySelectorAll('a[data-page]');
-        newLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const newPage = e.currentTarget.getAttribute('data-page');
-                showOverlay(newPage);
-            });
-        });
         window.addEventListener('load', () => {
-            const indonesiaSW = [-11.0, 95.0];   // southwest corner
-            const indonesiaNE = [6.0, 141.0];   // northeast corner
-            const indonesiaBounds = [indonesiaSW, indonesiaNE];
+            const indonesiaSW = [-11.0, 95.0];
+            const indonesiaNE = [6.0, 141.0];
             const map = L.map('map', {
-                center: [-2.5, 118.0],   // geographic center of Indonesia
-                zoom: 5.5,                 // adjust (3–6) until you see the full archipelago
-                minZoom: 4,              // don’t let users zoom out too far
-                maxZoom: 20,              // limit how far they can zoom in
-                maxBounds: indonesiaBounds,          // lock panning to Indonesia
-                maxBoundsViscosity: 1.0,             // “sticky” edges
-                zoomControl: true,                   // show the +/− buttons
-                worldCopyJump: false                 // don’t repeat the world
+                center: [-2.5, 118.0],
+                zoom: 5.5,
+                minZoom: 4,
+                maxZoom: 20,
+                maxBounds: [indonesiaSW, indonesiaNE],
+                maxBoundsViscosity: 1.0,
+                zoomControl: true,
+                worldCopyJump: false
             });
-            map.zoomControl.setPosition('bottomright'); // or any other corner
+            map.zoomControl.setPosition('bottomright');
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors',
                 maxZoom: 18,
-                noWrap: true                        // important: only load tiles once
+                noWrap: true
             }).addTo(map);
+            map.on('click', async e => {
+                try {
+                    const province = await getProvince(e.latlng.lat, e.latlng.lng);
+                    const response = await fetch(`/api/province-data?name=${encodeURIComponent(province)}`);
+                    const data = await response.json();
 
-            map.on('click', function (e) {
-                switchOverlay('page1');
+                    document.getElementById('total_sekolah').innerText = data.total_prov.total_sekolah_prov;
+                    document.getElementById('total_porsi').innerText = data.total_prov.total_porsi_prov;
+                    document.getElementById('total_siswa').innerText = data.total_prov.total_siswa_prov;
+
+                    switchOverlay(province);
+                } catch (err) {
+                    console.error(err);
+                    switchOverlay('Unknown Province');
+                }
             });
+
             window.addEventListener('resize', () => map.invalidateSize());
             setTimeout(() => map.invalidateSize(), 200);
         });
     </script>
+
 </body>
 
 </html>

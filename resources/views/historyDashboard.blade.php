@@ -190,8 +190,7 @@
             border-radius: 10px;
         }
 
-        .detailButton,
-        .backButton {
+        .button {
             width: 100px;
             height: 30px;
             background: none;
@@ -207,8 +206,7 @@
                 box-shadow 0.3s ease;
         }
 
-        .detailButton:hover,
-        .backButton:hover {
+        .button:hover {
             background-color: black;
             cursor: pointer;
             transform: scale(1.05);
@@ -217,6 +215,33 @@
 
         .red {
             color: red;
+        }
+
+        #deletePopUp {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #popupContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
         }
     </style>
 </head>
@@ -231,6 +256,13 @@
         window.onload = () => {
             document.getElementById('icon2').src = assetBaseUrl + 'Image/history-active.png'
             document.getElementById('iconTitle2').classList.add('active');
+        }
+        const docs = document.getElementById('deletePopUp');
+        function showPopUp() {
+            docs.style.display = 'flex';
+        }
+        function closePopUp() {
+            docs.style.display = 'none';
         }
     </script>
 </body>

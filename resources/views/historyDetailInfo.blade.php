@@ -4,7 +4,7 @@
     <div class="page">
         <div style="width:100%;display:flex;flex-direction:row;justify-content:space-between">
             <h1>Daftar Laporan > <span class="red">Detail Info</span></h1>
-            <button class="backButton" onclick="window.location.href='{{ route('historyDashboard') }}'">BACK</button>
+            <button class="button" onclick="window.location.href='{{ route('historyDashboard') }}'">BACK</button>
         </div>
         <div style="display:flex;flex-direction:row;" class="information">
             <div class="infoUmum">
@@ -70,22 +70,47 @@
                             </div>
                         </div>
                     </div>
-                    <div style="width: 50%;">
+                    <div style="width:50%;">
                         <div style="height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px"
                             class="box">
-                            <img src="{{ asset('Image/hand-shake.png') }}" alt="">
-                            <h1 style="font-size:70px">{{ $percentAccept }}%</h1>
+                            <div class="circle"
+                                style="width:150px;height:150px; border-radius:50%;background:conic-gradient(red 0% {{ $percentAccept }}%,
+                                                     white {{ $percentAccept }}% 100%);display:flex;align-items:center;justify-content:center;position:relative;">
+                                <div class="inner-circle"
+                                    style="width:100px;height:100px;background:white; border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;">
+                                    <h1 style="font-size:40px; margin:0;">
+                                        {{ $percentAccept }}%
+                                    </h1>
+                                </div>
+                            </div>
                             <h3>Persentase Penerimaan</h3>
                         </div>
                     </div>
+
                 </div>
                 <div class="bukti">
                     <div class="infoBukti">
                         <h2>Dokumentasi</h2>
-
                     </div> <img src="{{ $food->dokumentasi
         ? 'data:image/jpeg;base64,' . base64_encode($food->dokumentasi)
         : asset('Image/profile-user-grey.png') }}" style="width: 50%;">
+                </div>
+            </div>
+        </div>
+        <div style="align-self:flex-start;">
+            <button style="width:150px;height:40px" class="button" onclick="showPopUp()">Hapus Data</button>
+            <button style="width:150px;height:40px" class="button">Edit Data</button>
+        </div>
+        <div id="deletePopUp">
+            <div id="popupContent">
+                <p style="font-size: 20px;">Data akan terhapus!!</p>
+                <div style="display: flex;flex-direction:row;justify-content:center;gap:10px;">
+                    <form action="{{ route('delete-data', $food->id_makanan) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="button">Delete</button>
+                    </form>
+                    <button id="askButton" class="button" onclick="closePopUp()">Tidak</button>
                 </div>
             </div>
         </div>

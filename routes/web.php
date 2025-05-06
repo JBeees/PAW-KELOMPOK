@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UploadMakananController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\ProvinceController;
 use App\Models\Sekolah;
 
 
@@ -14,7 +15,8 @@ Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 Route::get('/peta-penyebaran', function () {
-    return view('petapenyebaran');
+    $total_id = ['total_sekolah_id' => Sekolah::count(), 'total_siswa_id' => Sekolah::sum('total_student'), 'total_porsi_id' => FoodInfo::sum('jumlah_porsi')];
+    return view('petapenyebaran', compact('total_id'));
 })->name('peta.penyebaran');
 Route::get('/laporan', function () {
     return view('laporan');
@@ -57,6 +59,9 @@ Route::post('/dashboardInUpdate', [DashboardController::class, 'updateProfileIma
 Route::put('/dashboard/update-data', [DashboardController::class, 'updateData'])->name('updateData');
 Route::post('/upload/tambah-makanan', [UploadMakananController::class, 'tambahMakanan'])->name('tambah-makanan');
 Route::get('/history/detail-info/{id}', [HistoryController::class, 'showDetail'])->name('detail-info');
+Route::delete('/history/delete-data/{id}', [HistoryController::class, 'deleteData'])->name('delete-data');
+Route::get('/api/province-data', [ProvinceController::class, 'getData']);
+
 
 
 

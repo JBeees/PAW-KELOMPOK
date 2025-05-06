@@ -45,7 +45,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top:100px;
+            padding-top: 100px;
         }
 
         .statement1 {
@@ -194,23 +194,29 @@
             font-size: 30px;
         }
 
-        .detailButton {
+        .button {
+            width: 180px;
+            height: 50px;
             background: none;
             background-color: white;
             color: red;
             border: none;
-            width: 230px;
-            height: 60px;
-            font-size: 30px;
-            border-radius: 20px;
-            margin-top: 20px;
+            font-size: 25px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin-top:10px ;
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease,
+                box-shadow 0.3s ease;
         }
 
-        .detailButton:hover {
+        .button:hover {
             background-color: red;
-            color: white;
+            color:white;
             cursor: pointer;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
         }
 
         .opsi {
@@ -325,13 +331,13 @@
                     <h3 class="righth3">Jelajahi peta interaktif kami dan lihat<br>persebaran dan data distribusi
                         makanan di<br> setiap
                         daerah</h3>
-                    <button class="detailButton">Selengkapnya</button>
+                    <button class="button" onclick="window.location.href='{{ route('peta.penyebaran') }}'">Selengkapnya</button>
                 </div>
                 <div class="opsi">
                     <h2 class="righth2">LAPORAN PROGRAM</h2>
                     <h3 class="righth3">Akses data hasil kinerja program. Data<br> berasal dari hasil verifikasi
                         lapangan</h3>
-                    <button class="detailButton">Selengkapnya</button>
+                    <button class="button" onclick="window.location.href='{{ route('laporan') }}'">Selengkapnya</button>
                 </div>
             </div>
         </div>
@@ -341,7 +347,7 @@
                     <p class="titleBantuan">Butuh Bantuan 🤔 </p>
                     <p class="textBantuan ">Tenang suara kami kami dengar<br> Akses fitur hotline kami yang bisa
                         menampung aspirasi laporan,<br> maupun keluh kesah kamu tentang Progam Makan Bergizi</p>
-                    <button class="helpButton">Kontak Kami</button>
+                    <button class="helpButton" onclick="window.location.href='{{ route('kontak') }}'">Kontak Kami</button>
                 </div>
                 <img class="helpimg" src="{{ asset('Image/help.jpg') }}">
             </div>

@@ -23,4 +23,18 @@ class ProvinceController extends Controller
             'school' => $schoolName
         ]);
     }
+    public function getDetailSchool(Request $request)
+    {
+        $nama_sekolah = $request->query('name');
+        $sekolah = Sekolah::where('name', $nama_sekolah)->first();
+        $id_sekolah = $sekolah->id;
+        $address = $sekolah->address;
+        $total_porsi = FoodInfo::where('id_sekolah', $id_sekolah)->sum('jumlah_porsi');
+        $total_siswa = $sekolah->total_student;
+        $dokum = FoodInfo::where('id_sekolah', $id_sekolah)->value('dokumentasi');
+        $infoSekolah = ['address' => $address, 'total_porsi' => $total_porsi, 'total_siswa' => $total_siswa,'dokum'=>base64_encode($dokum)];
+        return response()->json([
+            'infoSekolah' => $infoSekolah
+        ]);
+    }
 }

@@ -89,12 +89,12 @@
             font-size: 50px;
         }
 
-        .configOverlay {
+        #configOverlay,
+        #configOverlay2 {
             display: flex;
             width: 100%;
             height: 100%;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
         }
 
@@ -111,14 +111,12 @@
             gap: 40px;
         }
 
-        #tombolInfoUmum,
-        #tombolSekolah {
+        .tombolNavbarOverlay {
             padding-left: 10px;
             padding-right: 10px;
         }
 
-        #tombolInfoUmum:hover,
-        #tombolSekolah:hover {
+        .tombolNavbarOverlay:hover {
             background-color: red;
             color: white;
             border-radius: 10px;
@@ -133,6 +131,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            padding: 10px;
         }
 
         #overlayPart {
@@ -159,9 +158,10 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             border-radius: 10px;
+            padding: 25px;
         }
 
         .data-table {
@@ -187,7 +187,7 @@
 
         .data-table th,
         .data-table td {
-            padding: 18px 50px;
+            padding: 18px 20px;
             border: 1px solid #ddd;
             text-align: left;
         }
@@ -224,6 +224,24 @@
             align-items: center;
         }
 
+        #overlay3 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #overlay4 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
         .info2 {
             width: 100%;
             height: 100%;
@@ -255,6 +273,21 @@
             cursor: pointer;
             transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .tableSearch {
+            width: 50%;
+            height: 11%;
+            padding: 10px;
+        }
+
+        .tableSearch input {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            font-size: 17px;
+            padding-left: 10px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -296,11 +329,11 @@
     </div>
     <div id="miniOverlay">
         <span class="close-btn" id="close-btn">×</span>
-        <div class="configOverlay">
+        <div id="configOverlay">
             <h1 style="font-size: 40px;padding:10px;" id="provinceName">Province</h1>
             <div class="navbarOverlay">
-                <a id="tombolInfoUmum">Info Umum</a>
-                <a id="tombolSekolah">Sekolah Penerima</a>
+                <a id="tombolInfoUmum" class="tombolNavbarOverlay">Info Umum</a>
+                <a id="tombolSekolah" class="tombolNavbarOverlay">Sekolah Penerima</a>
             </div>
             <div id="overlay1">
                 <img src="{{ asset('Image/student.png') }}" style="width:50%;" alt="">
@@ -323,7 +356,7 @@
                     </div>
                     <div class="rightOverlay" id="overlayPart">
                         <div class="boxInfo">
-                            <img src="{{ asset('Image/truck.png') }}">
+                            <img src="{{ asset('Image/people.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px ;">
                                 <p style="font-size: 20px;">Total Porsi Terkirim </p>
                                 <p id="total_porsi"></p>
@@ -342,8 +375,7 @@
             <div id="overlay2">
                 <div class="info2">
                     <div class="tableSearch">
-                        <div></div>
-                        <div></div>
+                        <input type="search" placeholder="Masukkan Nama Sekolah">
                     </div>
                     <div class="table-container">
                         <table class="data-table">
@@ -360,6 +392,50 @@
                 </div>
             </div>
         </div>
+        <div id="configOverlay2" style="display:none;">
+            <h1 style="font-size: 40px;padding:10px;" id="schoolName">Nama Sekolah</h1>
+            <div class="navbarOverlay">
+                <a id="tombolInfoUmumSekolah" class="tombolNavbarOverlay">Info Umum</a>
+                <a id="tombolDokumSekolah" class="tombolNavbarOverlay">Dokumentasi</a>
+            </div>
+            <div id="overlay3">
+                <div class="alamatSekolah" style="padding-left:20px;align-self:flex-start;">
+                    <h1>Detail Sekolah</h1>
+                    <p id="address">Alamat</p>
+                </div>
+                <div id="overlayContent">
+                    <div class="leftOverlay" id="overlayPart">
+                        <div class="boxInfo" style="height:calc(70% + 40px);">
+                            <img src="{{ asset('Image/hand-shake.png') }}">
+                            <div style="display: flex;flex-direction: column; padding-left:20px;">
+                                <p style="font-size: 20px;">Persentase Penerimaan </p>
+                                <p>Example</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightOverlay" id="overlayPart">
+                        <div class="boxInfo">
+                            <img src="{{ asset('Image/truck.png') }}">
+                            <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                                <p style="font-size: 20px;">Total Porsi Terkirim </p>
+                                <p id="total_porsi_sekolah"></p>
+                            </div>
+                        </div>
+                        <div class="boxInfo">
+                            <img src="{{ asset('Image/people.png') }}">
+                            <div style="display: flex;flex-direction: column; padding-left:20px ;">
+                                <p style="font-size: 20px;">Total Siswa Penerima</p>
+                                <p id="total_siswa_sekolah"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="overlay4">
+                <img id="dokumSekolah" style="width: 50%;">
+            </div>
+        </div>
+
     </div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
@@ -438,8 +514,7 @@
       <td style="padding:20px">${i + 1}</td>
       <td>${f}</td>
       <td>
-        <button
-          class="button">Detail</button>
+        <button class="button detailButtonSekolah">Detail</button>
       </td>
     </tr>
   `;
@@ -460,6 +535,8 @@
                 tombolInfoUmum.classList.add('red');
                 document.getElementById('tombolSekolah').classList.remove('red');
                 document.getElementById('tombolSekolah').classList.add('black');
+                document.getElementById('configOverlay').style.display = 'flex';
+                document.getElementById('configOverlay2').style.display = 'none';
             }
             const closeButton = document.getElementById('close-btn');
             closeButton.addEventListener('click', async function (event) {
@@ -467,12 +544,59 @@
                 getBackInfoUmum();
                 document.getElementById('miniOverlay').style.display = 'none', document.getElementById('container').classList.remove('blur');
             });
+            let dataSekolah = null;
+            document.getElementById('rows').addEventListener('click', async function (event) {
+                if (event.target && event.target.classList.contains('detailButtonSekolah')) {
+                    event.preventDefault();
+                    document.getElementById('configOverlay').style.display = 'none';
+                    document.getElementById('configOverlay2').style.display = 'flex';
+                    getInfoUmumSekolah();
+                    const row = event.target.closest('tr');
+                    const schoolName = row.children[1].textContent.trim();
+                    try {
+                        const response = await fetch(
+                            `/api/school-data?name=${encodeURIComponent(schoolName)}`
+                        );
+                        dataSekolah = await response.json();
+                        document.getElementById('schoolName').innerText = schoolName;
+                        document.getElementById('address').innerText = dataSekolah.infoSekolah.address;
+                        document.getElementById('total_porsi_sekolah').innerText = dataSekolah.infoSekolah.total_porsi;
+                        document.getElementById('total_siswa_sekolah').innerText = dataSekolah.infoSekolah.total_siswa;
+                    }
+                    catch (err) {
+                        console.error('Error fetching school data:', err);
+                    }
+                }
+            });
+            const tombolInfoUmumSekolah = document.getElementById('tombolInfoUmumSekolah');
+            tombolInfoUmumSekolah.addEventListener('click', function (event) {
+                getInfoUmumSekolah();
+            });
+            const tombolDokumSekolah = document.getElementById('tombolDokumSekolah');
+            tombolDokumSekolah.addEventListener('click', function (event) {
+                getDokumSekolah();
+            });
+            function getInfoUmumSekolah() {
+                document.getElementById('tombolInfoUmumSekolah').classList.remove('black');
+                document.getElementById('tombolInfoUmumSekolah').classList.add('red');
+                document.getElementById('tombolDokumSekolah').classList.add('black');
+                document.getElementById('tombolDokumSekolah').classList.remove('red');
+                document.getElementById('overlay4').style.display = 'none';
+                document.getElementById('overlay3').style.display = 'flex';
+            }
+            function getDokumSekolah() {
+                document.getElementById('tombolInfoUmumSekolah').classList.remove('red');
+                document.getElementById('tombolInfoUmumSekolah').classList.add('black');
+                document.getElementById('tombolDokumSekolah').classList.add('red');
+                document.getElementById('tombolDokumSekolah').classList.remove('black');
+                document.getElementById('overlay4').style.display = 'flex';
+                document.getElementById('overlay3').style.display = 'none';
+                document.getElementById('dokumSekolah').src = 'data:image/jpeg;base64,' + dataSekolah.infoSekolah.dokum;
+            }
             window.addEventListener('resize', () => map.invalidateSize());
             setTimeout(() => map.invalidateSize(), 200);
         });
     </script>
-
-
 </body>
 
 </html>

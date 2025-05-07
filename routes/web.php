@@ -61,6 +61,7 @@ Route::post('/upload/tambah-makanan', [UploadMakananController::class, 'tambahMa
 Route::get('/history/detail-info/{id}', [HistoryController::class, 'showDetail'])->name('detail-info');
 Route::delete('/history/delete-data/{id}', [HistoryController::class, 'deleteData'])->name('delete-data');
 Route::get('/api/province-data', [ProvinceController::class, 'getData']);
+Route::get('/api/school-data', [ProvinceController::class, 'getDetailSchool']);
 
 
 

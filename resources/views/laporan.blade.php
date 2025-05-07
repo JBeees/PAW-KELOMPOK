@@ -57,14 +57,10 @@
             padding: 10px;
             border-radius: 30px;
             text-decoration: none;
-            color: black;
-            position: relative;
-            margin:10px;
-        }
-
-        .opsiLaporan a.active {
-            background-color: #ff4d4d;
+            background-color: red;
             color: white;
+            position: relative;
+            margin: 10px;
         }
     </style>
 </head>
@@ -78,27 +74,12 @@
         </div>
         <div class="opsiButton">
             <div class="opsiLaporan">
-                <a href="#" onclick="changeActive(this)" id="button1">Laporan Umum</a>
-                <a href="#" onclick="changeActive(this)" id="button2">Laporan Nutrisi</a>
+                <a id="button1">Laporan Umum</a>
             </div>
         </div>
     </div>
     <script>
-        function changeActive(element) {
-            const buttons = document.querySelectorAll('.opsiLaporan a');
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
-            element.classList.add('active');
-        }
-        window.onload = () => {
-            const activeButton = localStorage.getItem('activeButton');
-            if (activeButton) {
-                document.getElementById(activeButton).classList.add('active');
-            } else {
-                document.getElementById('button1').classList.add('active'); 
-            }
-        };
+
     </script>
 </body>
 

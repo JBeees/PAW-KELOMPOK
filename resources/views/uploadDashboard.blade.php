@@ -107,7 +107,7 @@
             align-items: center;
         }
 
-        #submit {
+        #submit, #successButton {
             width: 200px;
             height: 50px;
             margin-top: 30px;
@@ -124,7 +124,7 @@
                 box-shadow 0.3s ease;
         }
 
-        #submit:hover {
+        #submit:hover, #successButton:hover {
             background-color: black;
             cursor: pointer;
             transform: scale(1.05);

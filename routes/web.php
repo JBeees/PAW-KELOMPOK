@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UploadMakananController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\LaporanController;
 use App\Models\Sekolah;
 
 
@@ -62,6 +63,7 @@ Route::get('/history/detail-info/{id}', [HistoryController::class, 'showDetail']
 Route::delete('/history/delete-data/{id}', [HistoryController::class, 'deleteData'])->name('delete-data');
 Route::get('/api/province-data', [ProvinceController::class, 'getData']);
 Route::get('/api/school-data', [ProvinceController::class, 'getDetailSchool']);
+Route::get('/api/all-data', [LaporanController::class, 'getAllData']);
 
 
 

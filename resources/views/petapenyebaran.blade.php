@@ -298,7 +298,7 @@
         @include('partials.navbar')
         <div class="infoFooter">
             <div>
-                <img style="padding-left: 10px;" src="{{ asset('Image/graduation.png') }}">
+                <img style="padding-left: 10px;width:15%;" src="{{ asset('Image/graduation.png') }}">
                 <div style="display: flex;flex-direction: column; padding-left:20px ;">
                     <p style="font-size: 20px;">Total Sekolah Penerima</p>
                     <p>{{ $total_id['total_sekolah_id'] }}</p>
@@ -319,7 +319,7 @@
                 </div>
             </div>
             <div>
-                <img style="padding-left: 10px;" src="{{ asset('Image/people.png') }}">
+                <img style="padding-left: 10px;width:15%;" src="{{ asset('Image/people.png') }}">
                 <div style="display: flex;flex-direction: column; padding-left:20px ;">
                     <p style="font-size: 20px;">Total Siswa Penerima</p>
                     <p>{{ $total_id['total_siswa_id'] }}</p>
@@ -340,7 +340,7 @@
                 <div id="overlayContent">
                     <div class="leftOverlay" id="overlayPart">
                         <div class="boxInfo">
-                            <img src="{{ asset('Image/graduation.png') }}">
+                            <img style="width:15%;" src="{{ asset('Image/graduation.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px ;">
                                 <p style="font-size: 20px;">Total Sekolah Penerima</p>
                                 <p id="total_sekolah"></p>
@@ -356,14 +356,14 @@
                     </div>
                     <div class="rightOverlay" id="overlayPart">
                         <div class="boxInfo">
-                            <img src="{{ asset('Image/people.png') }}">
+                            <img style="width:15%;" src="{{ asset('Image/people.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px ;">
                                 <p style="font-size: 20px;">Total Porsi Terkirim </p>
                                 <p id="total_porsi"></p>
                             </div>
                         </div>
                         <div class="boxInfo">
-                            <img src="{{ asset('Image/people.png') }}">
+                            <img style="width:15%;" src="{{ asset('Image/people.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px ;">
                                 <p style="font-size: 20px;">Total Siswa Penerima</p>
                                 <p id="total_siswa"></p>
@@ -375,7 +375,7 @@
             <div id="overlay2">
                 <div class="info2">
                     <div class="tableSearch">
-                        <input type="search" placeholder="Masukkan Nama Sekolah">
+                        <input type="search" id="inputNamaSekolah" placeholder="Masukkan Nama Sekolah">
                     </div>
                     <div class="table-container">
                         <table class="data-table">
@@ -422,7 +422,7 @@
                             </div>
                         </div>
                         <div class="boxInfo">
-                            <img src="{{ asset('Image/people.png') }}">
+                            <img style="width:15%;" src="{{ asset('Image/people.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px ;">
                                 <p style="font-size: 20px;">Total Siswa Penerima</p>
                                 <p id="total_siswa_sekolah"></p>
@@ -593,6 +593,21 @@
                 document.getElementById('overlay3').style.display = 'none';
                 document.getElementById('dokumSekolah').src = 'data:image/jpeg;base64,' + dataSekolah.infoSekolah.dokum;
             }
+            const inputNamaSekolah = document.getElementById('inputNamaSekolah');
+            inputNamaSekolah.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    const namaSekolah = this.value.toLowerCase();
+                    const baris = document.querySelectorAll('#rows tr');
+                    baris.forEach(b => {
+                        const dataNamaSekolah = b.cells[1].textContent.toLowerCase();
+                        if (dataNamaSekolah.includes(namaSekolah)) {
+                            b.style.display = '';
+                        } else {
+                            b.style.display = 'none';
+                        }
+                    });
+                }
+            });
             window.addEventListener('resize', () => map.invalidateSize());
             setTimeout(() => map.invalidateSize(), 200);
         });

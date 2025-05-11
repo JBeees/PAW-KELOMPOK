@@ -15,9 +15,20 @@
             </div>
         </div>
         <div class="info">
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
+            <div class="box">
+                <img src="{{ asset('Image/cooking2.png') }}" style="width: 10%;" alt="">
+                <div>
+                    <h2>Total Penerimaan</h2>
+                    <h1 id="porsi">x</h1>
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ asset('Image/hand-shake2.png') }}" style="width: 10%;" alt="">
+                <div style="display:flex;flex-direction:column;">
+                    <h2>Persentase Penerimaan</h2>
+                    <h1 id="persen">x</h1>
+                </div>
+            </div>
         </div>
         <div class="table-container">
             <table class="data-table">
@@ -39,7 +50,8 @@
                             <td>{{ $f->waktu }}</td>
                             <td>{{ $f->tanggal }}</td>
                             <td>{{ $f->jumlah_porsi }}</td>
-                            <td><button onclick="window.location.href='{{ route('detail-info',$f->id_makanan) }}'" class="button">Detail</button></td>
+                            <td><button onclick="window.location.href='{{ route('detail-info', $f->id_makanan) }}'"
+                                    class="button">Detail</button></td>
                         </tr>
                     @endforeach
                 </tbody>

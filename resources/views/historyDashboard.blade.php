@@ -144,10 +144,15 @@
         }
 
         .box {
-            width: 100%;
+            width: 30%;
             height: 110px;
             border: 0.01px solid rgba(0, 0, 0, 0.2);
             border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
         }
 
         .data-table {

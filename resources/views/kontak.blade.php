@@ -86,18 +86,6 @@
             padding: 5px;
         }
 
-        #submit {
-            background-color: red;
-            border: none;
-            color: white;
-            height: 40px;
-            font-size: 20px;
-            border-radius: 10px;
-            padding: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-        }
-
         .upload-area {
             height: 150px;
             background: #f7f7f7;
@@ -133,6 +121,55 @@
             align-items: center;
             padding-left: 20px;
         }
+
+        button {
+            width: 100%;
+            height: 35px;
+            background: none;
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease,
+                box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background-color: black;
+            cursor: pointer;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        #errorPopUp {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #popupContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        #errorButton {
+            width: 100px;
+        }
     </style>
 </head>
 
@@ -150,7 +187,8 @@
                 <div class="boxKiri">
                     <h1>Kirim Laporan</h1>
                     <p style="font-size: 20px;opacity: 60%;">Laporan akan direspon melalui email maks 2x24 jam</p>
-                    <form>
+                    <form action="{{route('sendLaporan') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="fillform">
                             <label style="margin-top: 30px;margin-bottom:5px">Jenis Laporan</label>
                             <select id="input" style="height: 43px;" name="jenisLaporan">
@@ -160,7 +198,7 @@
                                 <option value="laporan">Laporan</option>
                             </select>
                             <label style="margin-top: 20px;margin-bottom:5px">Email</label>
-                            <input id="input" style="height: 35px;" type="email" placeholder="Email">
+                            <input id="input" style="height: 35px;" type="email" placeholder="Email" name="email">
                             <label style="margin-top: 20px;margin-bottom:5px">Deskripsi Masalah</label>
                             <textarea id="input" style="height: 90px;" name="deskripsi"
                                 placeholder="Ketik deskripsi masalah disini" rows="5"></textarea>
@@ -171,7 +209,7 @@
                                 </label>
                                 <input type="file" id="file-upload" hidden>
                             </div>
-                            <button id="submit">Kirim Laporan</button>
+                            <button id="submit" type="submit">Kirim Laporan</button>
                         </div>
                     </form>
                 </div>
@@ -202,6 +240,25 @@
             </div>
         </div>
     </div>
+    @if ($errors->any() || session('error'))
+        <div id="errorPopUp">
+            <div id="popupContent">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+                <p>{{ session('error') }}</p>
+                <button id="errorButton" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+        <script>
+            var myModal = document.getElementById('errorPopUp');
+            myModal.style.display = 'flex';
+            function closePopup() {
+                myModal.style.display = 'none';
+            }
+        </script>
+    @endif
     <script>
         const URL_PROVINCES = 'https://raw.githubusercontent.com/Caknoooo/provinces-cities-indonesia/main/json/provinces.json';
         const URL_REGENCIES = 'https://raw.githubusercontent.com/Caknoooo/provinces-cities-indonesia/main/json/regencies.json';

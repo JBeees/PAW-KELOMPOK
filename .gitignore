@@ -9,6 +9,7 @@
 /storage/logs
 /storage/pail
 /vendor
+.env.example
 .env
 .env.backup
 .env.production

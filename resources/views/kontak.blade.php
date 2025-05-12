@@ -296,8 +296,6 @@
                 citySelect.disabled = false;
             });
         }
-
-        // loadDaerah().catch(err => console.error(err));
         document.addEventListener('DOMContentLoaded', loadDaerah);  
     </script>
 </body>

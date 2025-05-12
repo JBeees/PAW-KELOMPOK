@@ -66,7 +66,7 @@ Route::get('/api/province-data', [ProvinceController::class, 'getData']);
 Route::get('/api/school-data', [ProvinceController::class, 'getDetailSchool']);
 Route::get('/api/all-data', [LaporanController::class, 'getAllData']);
 Route::post('/kontak/kirim-laporan', [KontakController::class, 'sendEmail'])->name('sendLaporan');
-
+Route::get('/api/history-data', [HistoryController::class, 'getHistoryData']);
 
 
 

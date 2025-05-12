@@ -21,4 +21,9 @@ class HistoryController extends Controller
         FoodInfo::where('id_makanan', $id)->first()->delete();
         return redirect()->route('historyDashboard')->with('success', 'Data berhasil dihapus!');
     }
+    public function getHistoryData()
+    {
+        $total_porsi = FoodInfo::where('id_sekolah', session('id'))->sum('jumlah_porsi');
+        return response()->json(['total_porsi' => $total_porsi]);
+    }
 }

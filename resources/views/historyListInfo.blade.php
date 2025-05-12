@@ -5,12 +5,12 @@
         <div class="searchBar">
             <div class="bar">
                 <label>Pencarian</label>
-                <input style="width:300px;height:40px;font-size:20px;border-radius:10px;" type="search"
-                    placeholder="Masukkan Kata Kunci">
+                <input id="inputNamaPengirim" style="width:300px;height:40px;font-size:20px;border-radius:10px;"
+                    type="search" placeholder="Masukkan Nama Pengirim">
             </div>
             <div class="bar">
                 <label>Tanggal</label>
-                <input style="width: 200px;height:40px;font-size:20px;border-radius:10px;x" type="date"
+                <input id="tanggal" style="width: 200px;height:40px;font-size:20px;border-radius:10px;x" type="date"
                     placeholder="Provinsi">
             </div>
         </div>
@@ -18,7 +18,7 @@
             <div class="box">
                 <img src="{{ asset('Image/cooking2.png') }}" style="width: 10%;" alt="">
                 <div>
-                    <h2>Total Penerimaan</h2>
+                    <h2>Total porsi diterima</h2>
                     <h1 id="porsi">x</h1>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                         <th>Detail</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="rows">
                     @foreach ($food as $f)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
@@ -59,3 +59,55 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        const assetBaseUrl = "{{ asset('') }}";
+        window.addEventListener('DOMContentLoaded', async function () {
+            document.getElementById('icon2').src = assetBaseUrl + 'Image/history-active.png'
+            document.getElementById('iconTitle2').classList.add('active');
+            const response = await fetch(`api/history-data`);
+            const data = await response.json();
+            console.log(data);
+            document.getElementById('porsi').innerText = data.total_porsi + " porsi";
+            const docs = document.getElementById('deletePopUp');
+            function showPopUp() {
+                docs.style.display = 'flex';
+            }
+            function closePopUp() {
+                docs.style.display = 'none';
+            }
+        });
+        const inputNamaPengirim = document.getElementById('inputNamaPengirim');
+        inputNamaPengirim.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                const namaPengirim = this.value.toLowerCase();
+                const baris = document.querySelectorAll('#rows tr');
+                baris.forEach(b => {
+                    const dataNamaPengirim = b.cells[1].textContent.toLowerCase();
+                    if (dataNamaPengirim.includes(namaPengirim)) {
+                        b.style.display = '';
+                    }
+                    else {
+                        b.style.display = 'none';
+                    }
+                });
+            }
+        });
+        const tanggal = document.getElementById('tanggal');
+        tanggal.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                const date = this.value.trim();
+                const baris = document.querySelectorAll('#rows tr');
+                baris.forEach(b => {
+                    const targetTanggal = b.cells[3].textContent;
+                    if (!date || targetTanggal === date) {
+                        b.style.display = '';
+                    } else {
+                        b.style.display = 'none';
+                    }
+                });
+            }
+        });
+
+    </script>
+@endpush

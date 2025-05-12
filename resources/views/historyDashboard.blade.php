@@ -88,6 +88,57 @@
             gap: 30px;
         }
 
+        .infoAtas {
+            width: 100%;
+            height: 40%;
+            display: flex;
+            border-radius: 20px;
+            gap: 30px;
+        }
+
+        .infoItem {
+            width: 50%;
+            height: 100%;
+            gap: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .infoSP {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            border-radius: 20px;
+            border: 0.01px solid rgba(0, 0, 0, 0.2);
+            padding-left: 20px;
+        }
+
+        .persen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            border: 0.01px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .box {
+            width: 30%;
+            height: 110px;
+            border: 0.01px solid rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+        }
+
         .bukti {
             width: 100%;
             height: 60%;
@@ -96,7 +147,7 @@
             padding: 30px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -104,7 +155,7 @@
             position: relative;
             width: 91%;
             margin-top: 40px;
-            height: auto;
+            min-height: 100vh;
             border-top-left-radius: 50px;
             background-color: white;
             align-self: flex-end;
@@ -143,17 +194,7 @@
             gap: 20px
         }
 
-        .box {
-            width: 30%;
-            height: 110px;
-            border: 0.01px solid rgba(0, 0, 0, 0.2);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 20px;
-        }
+
 
         .data-table {
             width: 100%;
@@ -195,6 +236,7 @@
         }
 
         .table-container {
+            min-width:100%;
             font-size: 25px;
             border-radius: 10px;
         }
@@ -260,20 +302,7 @@
         @include('partials.loggedInNavbar')
         @yield('content')
     </div>
-    <script>
-        const assetBaseUrl = "{{ asset('') }}";
-        window.onload = () => {
-            document.getElementById('icon2').src = assetBaseUrl + 'Image/history-active.png'
-            document.getElementById('iconTitle2').classList.add('active');
-        }
-        const docs = document.getElementById('deletePopUp');
-        function showPopUp() {
-            docs.style.display = 'flex';
-        }
-        function closePopUp() {
-            docs.style.display = 'none';
-        }
-    </script>
+    @stack('scripts')
 </body>
 
 </html>

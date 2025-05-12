@@ -51,42 +51,30 @@
                 </div>
             </div>
             <div class="groupOfBox">
-                <div style="width:100%;display: flex;flex-direction:row;gap:30px;height:40%">
-                    <div style="width:50%;display: flex;flex-direction:column;gap:30px">
-                        <div class="box"
-                            style="display:flex;flex-direction:row;justify-content:center;align-items:center;gap:20px">
-                            <img src="{{ asset('Image/graduation.png') }}" alt="">
+                <div class="infoAtas">
+                    <div class="infoItem">
+                        <div class="infoSP">
+                            <img src="{{ asset('Image/graduation.png') }}" style="width:15%" alt="">
                             <div style="display:flex;flex-direction:column">
                                 <h2>Jumlah Siswa</h2>
-                                <h3 style="font-weight: 100;">{{ $food->jumlah_siswa }}</h3>
+                                <h2>{{ $food->jumlah_siswa }}</h2>
                             </div>
                         </div>
-                        <div class="box"
-                            style="display:flex;flex-direction:row;justify-content:center;align-items:center;gap:20px">
-                            <img src="{{ asset('Image/cooking.png') }}" alt="">
+                        <div class="infoSP">
+                            <img src="{{ asset('Image/cooking2.png') }}" style="width:15%" alt="">
                             <div style="display:flex;flex-direction:column">
                                 <h2>Jumlah Porsi</h2>
-                                <h3 style="font-weight: 100;">{{ $food->jumlah_siswa }}</h3>
+                                <h2>{{ $food->jumlah_porsi }}</h2>
                             </div>
                         </div>
                     </div>
-                    <div style="width:50%;">
-                        <div style="height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px"
-                            class="box">
-                            <div class="circle"
-                                style="width:150px;height:150px; border-radius:50%;background:conic-gradient(red 0% {{ $percentAccept }}%,
-                                                                     white {{ $percentAccept }}% 100%);display:flex;align-items:center;justify-content:center;position:relative;">
-                                <div class="inner-circle"
-                                    style="width:100px;height:100px;background:white; border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;">
-                                    <h1 style="font-size:40px; margin:0;">
-                                        {{ $percentAccept }}%
-                                    </h1>
-                                </div>
-                            </div>
+                    <div class="infoItem">
+                        <div class="persen">
+                            <canvas id="progressChart" width="180" height="180"></canvas>
                             <h3>Persentase Penerimaan</h3>
+                            <h1 id="tempPercent">{{ $percentAccept }}</h1>
                         </div>
                     </div>
-
                 </div>
                 <div class="bukti">
                     <h2 style="align-self: flex-start;">Dokumentasi</h2>
@@ -116,3 +104,49 @@
     </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            Chart.defaults.font.family = "'Jost', sans-serif";
+            const num = document.getElementById('tempPercent').textContent.trim();
+            document.getElementById('tempPercent').innerText = '';
+            const percentage = Number(num);
+            const centerTextPlugin = {
+                id: 'centerText',
+                beforeDraw(chart) {
+                    const { ctx, width, height } = chart;
+                    ctx.save();
+                    const fontSize = (height / 4).toFixed(2);
+                    ctx.font = `${fontSize}px 'Jost', sans-serif`;
+                    ctx.fillStyle = '#333';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(`${percentage}%`, width / 2, height / 2);
+                    ctx.restore();
+                }
+            };
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [percentage, 100 - percentage],
+                        backgroundColor: ['red', '#e0e0e0'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '70%',
+                    responsive: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                },
+                plugins: [centerTextPlugin]
+            });
+
+        });
+    </script>
+@endpush

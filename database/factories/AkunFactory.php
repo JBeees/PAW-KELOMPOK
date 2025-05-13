@@ -22,7 +22,7 @@ class AkunFactory extends Factory
     {
         return [
             'email' => fake()->unique()->safeEmail(),
-            'password' =>  Hash::make('password'),
+            'password' => Hash::make('password'),
         ];
     }
 }

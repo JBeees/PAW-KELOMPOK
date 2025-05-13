@@ -17,7 +17,10 @@ Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 Route::get('/peta-penyebaran', function () {
-    $total_id = ['total_sekolah_id' => Sekolah::count(), 'total_siswa_id' => Sekolah::sum('total_student'), 'total_porsi_id' => FoodInfo::sum('jumlah_porsi')];
+    $total_porsi = FoodInfo::sum('jumlah_porsi');
+    $bagus = FoodInfo::sum('kualitas_bagus');
+    $persen = round(($bagus / $total_porsi) * 100, 1);
+    $total_id = ['total_sekolah_id' => Sekolah::count(), 'total_siswa_id' => Sekolah::sum('total_student'), 'total_porsi_id' => $total_porsi, 'persen' => $persen];
     return view('petapenyebaran', compact('total_id'));
 })->name('peta.penyebaran');
 Route::get('/laporan', function () {

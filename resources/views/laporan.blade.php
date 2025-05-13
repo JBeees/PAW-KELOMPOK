@@ -147,7 +147,7 @@
                 </div>
                 <div class="rightInformation">
                     <canvas id="progressChart" width="240" height="240">TES</canvas>
-                    <h2 style="text-align:center;">x dari seluruh pengiriman makanan terverifikasi</h2>
+                    <h2 style="text-align:center;" id="persenAll"></h2>
                 </div>
             </div>
             <div class="barInformation">
@@ -165,11 +165,12 @@
         window.addEventListener('load', async function () {
             const response = await fetch(`api/all-data`);
             const allData = await response.json();
+            const percentage = allData.totals.persen;
             document.getElementById('jumlahSiswa').innerText = allData.totals.siswa + " siswa";
             document.getElementById('jumlahSekolah').innerText = allData.totals.sekolah + " sekolah";
+            document.getElementById('persenAll').innerText = percentage + "% dari seluruh pengiriman makanan terverifikasi";
             console.log(allData);
             Chart.defaults.font.family = "'Jost', sans-serif";
-            const percentage = 75;
             const centerTextPlugin = {
                 id: 'centerText',
                 beforeDraw(chart) {

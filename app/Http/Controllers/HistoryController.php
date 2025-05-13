@@ -24,6 +24,8 @@ class HistoryController extends Controller
     public function getHistoryData()
     {
         $total_porsi = FoodInfo::where('id_sekolah', session('id'))->sum('jumlah_porsi');
-        return response()->json(['total_porsi' => $total_porsi]);
+        $bagus = FoodInfo::where('id_sekolah', session('id'))->sum('kualitas_bagus');
+        $persen = round(($bagus / $total_porsi) * 100, 1);
+        return response()->json(['total_porsi' => $total_porsi, 'persen' => $persen]);
     }
 }

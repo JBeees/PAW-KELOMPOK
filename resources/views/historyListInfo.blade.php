@@ -69,6 +69,7 @@
             const data = await response.json();
             console.log(data);
             document.getElementById('porsi').innerText = data.total_porsi + " porsi";
+            document.getElementById('persen').innerText = data.persen + "%";
             const docs = document.getElementById('deletePopUp');
             function showPopUp() {
                 docs.style.display = 'flex';

@@ -25,7 +25,7 @@ class SekolahFactory extends Factory
         return [
             'id' => $number++,
             'name' => $this->faker->company . ' School',
-            'phone_number' => $this->faker->e164PhoneNumber,
+            'phone_number' => $this ->faker->e164PhoneNumber,
             'address' => $this->faker->address,
             'province' => Province::find($regency->province_id)->name,
             'city' => $regency->name,

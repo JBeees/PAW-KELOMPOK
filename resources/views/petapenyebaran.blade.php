@@ -308,7 +308,7 @@
                 <img style="padding-left: 10px;" src="{{ asset('Image/hand-shake.png') }}">
                 <div style="display: flex;flex-direction: column; padding-left:20px ;">
                     <p style="font-size: 20px;">Persentase Penerimaan </p>
-                    <p>Example</p>
+                    <p>{{ $total_id['persen'] }}%</p>
                 </div>
             </div>
             <div>
@@ -350,7 +350,7 @@
                             <img src="{{ asset('Image/hand-shake.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px ;">
                                 <p style="font-size: 20px;">Persentase Penerimaan </p>
-                                <p>Example</p>
+                                <p id="persenProv"></p>
                             </div>
                         </div>
                     </div>
@@ -409,7 +409,7 @@
                             <img src="{{ asset('Image/hand-shake.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px;">
                                 <p style="font-size: 20px;">Persentase Penerimaan </p>
-                                <p>Example</p>
+                                <p id="persenSekolah"></pid>
                             </div>
                         </div>
                     </div>
@@ -486,6 +486,7 @@
                     document.getElementById('total_sekolah').innerText = data.total_prov.total_sekolah_prov;
                     document.getElementById('total_porsi').innerText = data.total_prov.total_porsi_prov;
                     document.getElementById('total_siswa').innerText = data.total_prov.total_siswa_prov;
+                    document.getElementById('persenProv').innerText = data.total_prov.persen;
                     switchOverlay(lastProvince);
                 } catch (err) {
                     console.error(err);
@@ -562,6 +563,7 @@
                         document.getElementById('address').innerText = dataSekolah.infoSekolah.address;
                         document.getElementById('total_porsi_sekolah').innerText = dataSekolah.infoSekolah.total_porsi;
                         document.getElementById('total_siswa_sekolah').innerText = dataSekolah.infoSekolah.total_siswa;
+                        document.getElementById('persenSekolah').innerText = dataSekolah.infoSekolah.persen;
                     }
                     catch (err) {
                         console.error('Error fetching school data:', err);

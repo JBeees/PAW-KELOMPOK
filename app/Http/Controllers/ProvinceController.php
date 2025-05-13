@@ -12,10 +12,16 @@ class ProvinceController extends Controller
     {
         $nama_provinsi = $request->query('name');
         $schoolIds = Sekolah::where('province', $nama_provinsi)->pluck('id');
+        $total_porsi = FoodInfo::whereIn('id_sekolah', $schoolIds)->sum('jumlah_porsi') ?: 0;
+        $bagus = FoodInfo::whereIn('id_sekolah', $schoolIds)->sum('kualitas_bagus') ?: 0;
+        $persen = $total_porsi > 0
+            ? round(($bagus / $total_porsi) * 100, 1)
+            : 0;
         $total_prov = [
             'total_sekolah_prov' => count($schoolIds),
             'total_siswa_prov' => Sekolah::where('province', $nama_provinsi)->sum('total_student'),
-            'total_porsi_prov' => FoodInfo::whereIn('id_sekolah', $schoolIds)->sum('jumlah_porsi'),
+            'total_porsi_prov' => $total_porsi,
+            'persen' => $persen
         ];
         $schoolName = Sekolah::where('province', $nama_provinsi)->pluck('name');
         return response()->json([
@@ -30,9 +36,13 @@ class ProvinceController extends Controller
         $id_sekolah = $sekolah->id;
         $address = $sekolah->address;
         $total_porsi = FoodInfo::where('id_sekolah', $id_sekolah)->sum('jumlah_porsi');
+        $bagus = FoodInfo::where('id_sekolah', $id_sekolah)->sum('kualitas_bagus');
+        $persen = $total_porsi > 0
+            ? round(($bagus / $total_porsi) * 100, 1)
+            : 0;
         $total_siswa = $sekolah->total_student;
         $dokum = FoodInfo::where('id_sekolah', $id_sekolah)->value('dokumentasi');
-        $infoSekolah = ['address' => $address, 'total_porsi' => $total_porsi, 'total_siswa' => $total_siswa,'dokum'=>base64_encode($dokum)];
+        $infoSekolah = ['address' => $address, 'total_porsi' => $total_porsi, 'total_siswa' => $total_siswa, 'dokum' => base64_encode($dokum), 'persen' => $persen];
         return response()->json([
             'infoSekolah' => $infoSekolah
         ]);

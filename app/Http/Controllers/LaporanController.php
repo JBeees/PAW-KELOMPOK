@@ -11,6 +11,13 @@ class LaporanController extends Controller
     {
         $siswaData = Sekolah::sum('total_student');
         $sekolahData = Sekolah::count('id');
+        $total_porsi = FoodInfo::sum('jumlah_porsi') ?: 0;
+        $bagus = FoodInfo::sum('kualitas_bagus') ?: 0;
+        if ($total_porsi > 0) {
+            $persen = round(($bagus / $total_porsi) * 100, 1);
+        } else {
+            $persen = 0;
+        }
         $data = Sekolah::selectRaw(" YEAR(tanggal) AS year, MONTH(tanggal) AS month, SUM(total_student) AS siswa,COUNT(DISTINCT id) AS sekolah")
             ->groupBy('year', 'month')
             ->orderBy('year')
@@ -50,6 +57,7 @@ class LaporanController extends Controller
             'totals' => [
                 'siswa' => $siswaData,
                 'sekolah' => $sekolahData,
+                'persen' => $persen,
             ],
             'data' => $dataPerTahun,
         ];

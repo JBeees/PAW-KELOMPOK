@@ -9,8 +9,7 @@
 /storage/logs
 /storage/pail
 /vendor
-!storage/.gitignore
-.env.example
+!/storage/.gitignore
 .env
 .env.backup
 .env.production

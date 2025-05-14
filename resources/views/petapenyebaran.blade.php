@@ -486,7 +486,7 @@
                     document.getElementById('total_sekolah').innerText = data.total_prov.total_sekolah_prov;
                     document.getElementById('total_porsi').innerText = data.total_prov.total_porsi_prov;
                     document.getElementById('total_siswa').innerText = data.total_prov.total_siswa_prov;
-                    document.getElementById('persenProv').innerText = data.total_prov.persen;
+                    document.getElementById('persenProv').innerText = data.total_prov.persen + "%";
                     switchOverlay(lastProvince);
                 } catch (err) {
                     console.error(err);
@@ -563,7 +563,7 @@
                         document.getElementById('address').innerText = dataSekolah.infoSekolah.address;
                         document.getElementById('total_porsi_sekolah').innerText = dataSekolah.infoSekolah.total_porsi;
                         document.getElementById('total_siswa_sekolah').innerText = dataSekolah.infoSekolah.total_siswa;
-                        document.getElementById('persenSekolah').innerText = dataSekolah.infoSekolah.persen;
+                        document.getElementById('persenSekolah').innerText = dataSekolah.infoSekolah.persen + "%";
                     }
                     catch (err) {
                         console.error('Error fetching school data:', err);

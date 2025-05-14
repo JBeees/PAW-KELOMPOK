@@ -122,8 +122,7 @@
             margin: 20px;
         }
 
-        #edit,
-        #submit {
+        .button {
             width: 200px;
             height: 50px;
             margin-top: 30px;
@@ -140,8 +139,7 @@
                 box-shadow 0.3s ease;
         }
 
-        #edit:hover,
-        #submit:hover {
+        .button:hover {
             background-color: black;
             cursor: pointer;
             transform: scale(1.05);
@@ -229,8 +227,8 @@
                             <input name="city" id="cityEdit" class="inputEdit" type="text" placeholder="Update Kota"
                                 style="display:none">
                         </div>
-                        <button type="button" id="edit" onclick="updateData()">EDIT</button>
-                        <button type="submit" id="submit" onclick="updateData()" style="display:none;">Submit</button>
+                        <button type="button" class="button" id="edit" onclick="updateData()">EDIT</button>
+                        <button type="submit" class="button" id="submit" onclick="updateData()" style="display:none;">Submit</button>
                     </form>
                 </div>
             </div>
@@ -258,7 +256,7 @@
         <div id="successPopUp">
             <div id="popupContent">
                 <p>{{ session('success') }}</p>
-                <button id="successButton" onclick="closePopup()">Close</button>
+                <button id="successButton"  class="button" onclick="closePopup()">Close</button>
             </div>
         </div>
 

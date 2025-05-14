@@ -27,6 +27,6 @@ class DashboardController extends Controller
         $sekolah->province = $request->filled('province') ? htmlspecialchars($request->input('province')) : $sekolah->province;
         $sekolah->city = $request->filled('city') ? htmlspecialchars($request->input('city')) : $sekolah->city;
         $sekolah->save();
-        return redirect()->back()->with('success', 'Data updated!');
+        return redirect()->back()->with('success', 'Data berhasil diubah!');
     }
 }

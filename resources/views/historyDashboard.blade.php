@@ -236,7 +236,7 @@
         }
 
         .table-container {
-            min-width:100%;
+            min-width: 100%;
             font-size: 25px;
             border-radius: 10px;
         }
@@ -294,11 +294,89 @@
             flex-direction: column;
             justify-content: space-evenly;
         }
+
+        #miniOverlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 800px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            display: none;
+            flex-direction: column;
+            z-index: 9999;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn {
+            align-self: flex-start;
+            cursor: pointer;
+            font-size: 60px;
+            margin-left: 15px;
+        }
+
+        #form {
+            width: 100%;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .formUbah {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 20px;
+        }
+
+        .formUbah input,
+        .formUbah textarea {
+            padding: 5px;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        #successPopUp {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            pointer-events: auto;
+        }
+
+        #popupContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        #successButton {
+            width: 100px;
+            align-self: center;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div id="container" class="container">
         @include('partials.loggedInNavbar')
         @yield('content')
     </div>

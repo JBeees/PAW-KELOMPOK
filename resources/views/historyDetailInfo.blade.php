@@ -86,7 +86,7 @@
         </div>
         <div style="align-self:flex-start;">
             <button style="width:150px;height:40px" class="button" onclick="showPopUp()">Hapus Data</button>
-            <button style="width:150px;height:40px" class="button">Edit Data</button>
+            <button style="width:150px;height:40px" class="button" onclick="showOverlay()">Edit Data</button>
         </div>
     </div>
     <div id="deletePopUp">
@@ -96,18 +96,75 @@
                 <form action="{{ route('delete-data', $food->id_makanan) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="button">Delete</button>
+                    <button type="submit" class="button">Hapus</button>
                 </form>
                 <button id="askButton" class="button" onclick="closePopUp()">Tidak</button>
             </div>
         </div>
     </div>
+    <div id="miniOverlay">
+        <span class="close-btn" id="close-btn" onclick="closeOverlay()">×</span>
+        <div id="form">
+            <h1 style="align-self:center;margin-bottom:30px;font-size:40px">Edit Data</h1>
+            <form action="{{ route('updateFoodData', $food->id_makanan) }}" method="POST" class="formUbah">
+                @csrf
+                @method('PUT')
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                    <label for="">Nama Pengirim</label>
+                    <input style="width:40%" type="text" name="nama">
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                    <label for="">No.Telepon</label>
+                    <input style="width:40%" type="tel" name="phone">
+                </div>
+                <div style="display: flex;flex-direction:row;justify-content:space-between;">
+                    <div style="display: flex;flex-direction:column;">
+                        <label for="">Jumlah Porsi</label>
+                        <input style="width:90%" type="number" name="porsi">
+                    </div>
+                    <div style="display: flex;flex-direction:column;">
+                        <label for="">Jumlah Makanan Bagus</label>
+                        <input style="width:90%" type="number" name="good">
+                    </div>
+                    <div style="display: flex;flex-direction:column;">
+                        <label for="">Jumlah Makanan Buruk</label>
+                        <input style="width:90%" type="number" name="bad">
+                    </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+                    <label for="">Catatan</label>
+                    <textarea style="width:100%;height:20vh" type="text" name="note" rows="4"></textarea>
+                </div>
+                <button id="submit" class="button" type="submit">Ubah</button>
+            </form>
+        </div>
     </div>
 @endsection
 @push('scripts')
+    @if (session('success'))
+        <div id="successPopUp">
+            <div id="popupContent">
+                <p>{{ session('success') }}</p>
+                <button id="successButton" class="button" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+        <script>
+            var myModal = document.getElementById('successPopUp');
+            myModal.style.display = 'flex';
+            function closePopup() {
+                myModal.style.display = 'none';
+            }
+        </script>
+    @endif
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        const container = document.getElementById('container');
+        const overlay = document.getElementById('miniOverlay');
         window.addEventListener('DOMContentLoaded', () => {
+            const assetBaseUrl = "{{ asset('') }}";
+            document.getElementById('icon2').src = assetBaseUrl + 'Image/history-active.png'
+            document.getElementById('iconTitle2').classList.add('active');
             Chart.defaults.font.family = "'Jost', sans-serif";
             const num = document.getElementById('tempPercent').textContent.trim();
             document.getElementById('tempPercent').innerText = '';
@@ -148,5 +205,18 @@
             });
 
         });
+        const docs = document.getElementById('deletePopUp');
+        function showPopUp() {
+            docs.style.display = 'flex';
+        }
+        function closePopUp() {
+            docs.style.display = 'none';
+        }
+        function showOverlay() {
+            overlay.style.display = 'block';
+        }
+        function closeOverlay() {
+            overlay.style.display = 'none';
+        }
     </script>
 @endpush

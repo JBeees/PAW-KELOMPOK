@@ -11,6 +11,7 @@
 /vendor
 !/storage/.gitignore
 .env
+.env.example
 .env.backup
 .env.production
 .phpactor.json

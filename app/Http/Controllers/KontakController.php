@@ -3,30 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\InfoLaporan;
 
 class KontakController extends Controller
 {
-    public function sendEmail(Request $request)
+    public function uploadLaporan(Request $request)
     {
         $request->validate([
-            'jenisLaporan' => 'required',
-            'email' => 'required|email',
-            'deskripsi' => 'required'
+            'email' => 'required|email|unique:info_laporan,email',
+            'deskripsi' => 'required',
         ]);
-        $jenisLaporan = $request->input('jenisLaporan');
-        $email = $request->input('email');
-        $deskripsi = $request->input('deskripsi');
-
-        $to = $email;
-        $subject = "Testing " . $jenisLaporan;
-        $body = "Deskripsi Masalah\n" . $deskripsi;
-
-        $headers = "From: no-reply@yourdomain.com";
-        $cek = mail($to, $subject, $body, $headers);
-        if ($cek) {
-            return redirect()->route('kontak');
-        } else {
-            return back()->withErrors(['error' => 'Trouble Detected']);
-        }
+        $info = new InfoLaporan();
+        $info->tipe_laporan = $request->input('jenisLaporan');
+        $info->email = $request->input('email');
+        $info->deskripsi = $request->input('deskripsi');
+        $info->save();
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
     }
 }

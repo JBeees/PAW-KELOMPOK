@@ -46,6 +46,10 @@
         .laporan {
             width: 80%;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .textLaporan {
@@ -113,6 +117,29 @@
             width: 10%;
             font-size: 20px;
         }
+
+        .rollerContainer {
+            margin: 5%;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+            background-image: url('Image/indo.png');
+            background-size: 120%;
+            background-position: center;
+        }
+
+        #roller-content {
+            width: 100%;
+        }
+
+        .roller-data {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1em;
+            padding: 20px;
+        }
     </style>
 </head>
 
@@ -158,8 +185,34 @@
                 </select>
                 <canvas id="barChart"></canvas>
             </div>
+            <h1>Laporan Publik</h1>
+            <div class="rollerContainer">
+                <div id="roller" style="overflow: hidden; height: 20em;">
+                    <div id="roller-content">
+                        @foreach($data as $d)
+                            <div class="roller-data">
+                                <div style="width:60%;">
+                                    <p style="font-size:22px">Tipe: {{ $d->tipe_laporan }}</p>
+                                    <p style="font-size:20px;">Pesan: {{ $d->deskripsi }}</p>
+                                </div>
+                                <div style="width:40%;display:flex;justify-content:flex-end">
+                                    <p style="font-size:20px;">{{ anonymizeEmail($d->email) }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    @php
+        function anonymizeEmail($email)
+        {
+            $parts = explode('@', $email);
+            $name = substr($parts[0], 0, 2) . str_repeat('*', max(0, strlen($parts[0]) - 2));
+            return $name . '@' . $parts[1];
+        }
+    @endphp
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         window.addEventListener('load', async function () {
@@ -280,6 +333,25 @@
                 }
                 barDiagram.update();
             });
+            const roller = document.getElementById("roller-content");
+            const items = roller.children;
+            let index = 0;
+            const firstClone = items[0].cloneNode(true);
+            roller.appendChild(firstClone);
+            const itemHeight = items[0].offsetHeight;
+
+            setInterval(() => {
+                index++;
+                roller.style.transition = "margin-top 0.5s";
+                roller.style.marginTop = `-${index * itemHeight}px`;
+                if (index === items.length) {
+                    setTimeout(() => {
+                        roller.style.transition = "none";
+                        roller.style.marginTop = "0px";
+                        index = 0;
+                    }, 600);
+                }
+            }, 2000);
         });
     </script>
 </body>

@@ -57,7 +57,7 @@
             padding: 70px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
             border-radius: 40px;
-            height: 1200px;
+            height: 55em;
             display: flex;
             flex-direction: column;
         }
@@ -70,7 +70,7 @@
             padding: 70px;
             margin-left: ;
             width: 100%;
-            height: 1200px;
+            height: 45em;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
             border-radius: 40px;
         }
@@ -84,27 +84,6 @@
             font-size: 20px;
             border-radius: 10px;
             padding: 5px;
-        }
-
-        .upload-area {
-            height: 150px;
-            background: #f7f7f7;
-            border: 0.1px solid black;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .upload-label {
-            text-align: center;
-            color: #555;
-            font-size: 16px;
-            cursor: pointer;
         }
 
         .daerah select {
@@ -183,11 +162,11 @@
         </div>
         <div class="kelasSaran">
             <div class="boxSaran" style="width: 53%;">
-                <h1 style="font-size: 40px;">Apa yang bisa Kami Bantu?</h1>
+                <h1 style="font-size: 3em;align-self:center">Apa yang bisa Kami Bantu?</h1>
                 <div class="boxKiri">
                     <h1>Kirim Laporan</h1>
                     <p style="font-size: 20px;opacity: 60%;">Laporan akan direspon melalui email maks 2x24 jam</p>
-                    <form action="{{route('sendLaporan') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('uploadLaporan') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="fillform">
                             <label style="margin-top: 30px;margin-bottom:5px">Jenis Laporan</label>
@@ -202,19 +181,12 @@
                             <label style="margin-top: 20px;margin-bottom:5px">Deskripsi Masalah</label>
                             <textarea id="input" style="height: 90px;" name="deskripsi"
                                 placeholder="Ketik deskripsi masalah disini" rows="5"></textarea>
-                            <label style="margin-top: 20px;margin-bottom:5px">Unggah Bukti</label>
-                            <div class="upload-area">
-                                <label for="file-upload" class="upload-label">
-                                    <p>Unggah dokumen pendukung di sini (PDF, JPG, maks. 500 MB)</p>
-                                </label>
-                                <input type="file" id="file-upload" hidden>
-                            </div>
-                            <button id="submit" type="submit">Kirim Laporan</button>
+                            <button style="margin-top:1em" id="submit" type="submit">Kirim Laporan</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="boxSaran" style="width: 43%;">
+            <!-- <div class="boxSaran" style="width: 43%;">
                 <h1 style="font-size: 40px;">Punya Masalah Darurat?</h1>
                 <form>
                     <div class="fillform">
@@ -237,16 +209,18 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
-    @if ($errors->any() || session('error'))
+    @if ($errors->any() || session('success'))
         <div id="errorPopUp">
             <div id="popupContent">
                 @foreach ($errors->all() as $error)
                     <p>{{ $error }}</p>
                 @endforeach
-                <p>{{ session('error') }}</p>
+                @if(session('success'))
+                    <p>{{ session('success') }}</p>
+                @endif
                 <button id="errorButton" onclick="closePopup()">Close</button>
             </div>
         </div>

@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\KontakController;
 use App\Models\FoodInfo;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UploadMakananController;
@@ -23,12 +23,10 @@ Route::get('/peta-penyebaran', function () {
     $total_id = ['total_sekolah_id' => Sekolah::count(), 'total_siswa_id' => Sekolah::sum('total_student'), 'total_porsi_id' => $total_porsi, 'persen' => $persen];
     return view('petapenyebaran', compact('total_id'));
 })->name('peta.penyebaran');
-Route::get('/laporan', function () {
-    return view('laporan');
-})->name('laporan');
 Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');
+Route::get('/laporan', [LaporanController::class, 'rollerData'])->name('laporan');
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -68,9 +66,10 @@ Route::delete('/history/delete-data/{id}', [HistoryController::class, 'deleteDat
 Route::get('/api/province-data', [ProvinceController::class, 'getData']);
 Route::get('/api/school-data', [ProvinceController::class, 'getDetailSchool']);
 Route::get('/api/all-data', [LaporanController::class, 'getAllData']);
-Route::post('/kontak/kirim-laporan', [KontakController::class, 'sendEmail'])->name('sendLaporan');
 Route::get('/api/history-data', [HistoryController::class, 'getHistoryData']);
 Route::put('/history/update-food-data/{id}', [HistoryController::class, 'updateData'])->name('updateFoodData');
+Route::post('/kontak/upload', [KontakController::class, 'uploadLaporan'])->name('uploadLaporan');
+
 
 
 

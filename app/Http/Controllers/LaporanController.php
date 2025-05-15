@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FoodInfo;
 use App\Models\Sekolah;
+use App\Models\InfoLaporan;
 
 class LaporanController extends Controller
 {
@@ -63,5 +64,9 @@ class LaporanController extends Controller
         ];
         return response()->json($response);
     }
-
+    public function rollerData()
+    {
+        $data = InfoLaporan::all();
+        return view('laporan', compact('data'));
+    }
 }

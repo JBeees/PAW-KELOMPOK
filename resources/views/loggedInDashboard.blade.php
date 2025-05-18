@@ -151,6 +151,7 @@
             font-size: 20px;
             padding: 10px
         }
+
         #successPopUp {
             display: none;
             position: fixed;
@@ -170,17 +171,46 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             text-align: center;
-            width: 300px;   
+            width: 300px;
         }
 
         #successButton {
             width: 100px;
         }
+
+        #deletePopUp {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25%;
+            height: 25%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            background-color: white;
+        }
+
+        body.noscroll {
+            overflow: hidden;
+        }
+
+        #pageContainer.blur {
+            filter: blur(5px);
+            pointer-events: none;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="pageContainer">
         @include('partials.loggedInNavbar')
         <div class="page">
             <h1 style="font-size: 50px;">Informasi Sekolah</h1>
@@ -206,7 +236,7 @@
                         <div class="infoTable">
                             <strong>Nomor HP:</strong>
                             <p id="phoneData">{{ $sekolah->phone_number }}</p>
-                            <input name="phone" id="phoneEdit" class="inputEdit" type="text"
+                            <input name="phone" id="phoneEdit" class="inputEdit" type="tel"
                                 placeholder="Update Nomor HP" style="display:none">
                         </div>
                         <div class="infoTable">
@@ -227,12 +257,27 @@
                             <input name="city" id="cityEdit" class="inputEdit" type="text" placeholder="Update Kota"
                                 style="display:none">
                         </div>
-                        <button type="button" class="button" id="edit" onclick="updateData()">EDIT</button>
-                        <button type="submit" class="button" id="submit" onclick="updateData()" style="display:none;">Submit</button>
+                        <div style="display: flex;flex-direction:row;gap:10px">
+                            <button type="submit" class="button" id="submit" style="display:none;">Submit</button>
+                            <button type="button" class="button" id="back" onclick="flipPage()"
+                                style="display:none;">Kembali</button>
+                            <button type="button" class="button" id="edit" onclick="flipPage()">Edit</button>
+                            <button type="button" class="button" id="popUpDelete">Hapus Akun</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+    <div id="deletePopUp">
+        <h2>Yakin menghapus akun anda?</h2>
+        <form action="{{ route('deleteAccount') }}" method="post" style="display:flex;flex-direction:row;gap:10px">
+            @csrf
+            @method('DELETE')
+            <button class="button" type="submit" id="deleteAkun">Ya</button>
+            <button type="button" class="button" id="closeDeletePopUp">Tidak</button>
+        </form>
     </div>
     <script>
         const assetBaseUrl = "{{ asset('') }}";
@@ -241,7 +286,7 @@
             document.getElementById('iconTitle1').classList.add('active');
         }
         let flipEdit = false;
-        function updateData() {
+        function flipPage() {
             flipEdit = !flipEdit;
             const data = ['phone', 'address', 'province', 'city'];
             data.forEach(d => {
@@ -249,14 +294,27 @@
                 document.getElementById(d + "Edit").style.display = flipEdit ? 'block' : 'none';
             });
             document.getElementById("submit").style.display = flipEdit ? 'block' : 'none';
+            document.getElementById("back").style.display = flipEdit ? 'block' : 'none';
             document.getElementById("edit").style.display = flipEdit ? 'none' : 'block';
+            document.getElementById("popUpDelete").style.display = flipEdit ? 'none' : 'block';
         }
+        const deletePopUpButton = document.getElementById('popUpDelete');
+        let deleteFlip = false;
+        deletePopUpButton.addEventListener('click', function () {
+            document.getElementById("deletePopUp").style.display = 'flex';
+            document.body.classList.add('noscroll');
+            document.getElementById('pageContainer').classList.add('blur');
+        });
+        document.getElementById('closeDeletePopUp').addEventListener('click', function () {
+            document.getElementById("deletePopUp").style.display = 'none';
+            document.getElementById('pageContainer').classList.remove('blur');
+        });
     </script>
     @if (session('success'))
         <div id="successPopUp">
             <div id="popupContent">
                 <p>{{ session('success') }}</p>
-                <button id="successButton"  class="button" onclick="closePopup()">Close</button>
+                <button id="successButton" class="button" onclick="closePopup()">Close</button>
             </div>
         </div>
 

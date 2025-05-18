@@ -409,7 +409,7 @@
                             <img src="{{ asset('Image/hand-shake.png') }}">
                             <div style="display: flex;flex-direction: column; padding-left:20px;">
                                 <p style="font-size: 20px;">Persentase Penerimaan </p>
-                                <p id="persenSekolah"></pid>
+                                <p id="persenSekolah"></p>
                             </div>
                         </div>
                     </div>

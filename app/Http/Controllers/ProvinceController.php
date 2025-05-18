@@ -42,7 +42,7 @@ class ProvinceController extends Controller
             : 0;
         $total_siswa = $sekolah->total_student;
         $dokum = FoodInfo::where('id_sekolah', $id_sekolah)->value('dokumentasi');
-        $infoSekolah = ['address' => $address, 'total_porsi' => $total_porsi, 'total_siswa' => $total_siswa, 'dokum' => base64_encode($dokum), 'persen' => $persen];
+        $infoSekolah = ['address' => $address, 'total_porsi' => $bagus, 'total_siswa' => $total_siswa, 'dokum' => base64_encode($dokum), 'persen' => $persen];
         return response()->json([
             'infoSekolah' => $infoSekolah
         ]);

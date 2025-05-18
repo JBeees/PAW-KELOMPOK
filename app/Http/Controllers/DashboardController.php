@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodInfo;
 use Illuminate\Http\Request;
 use App\Models\Sekolah;
+use App\Models\Akun;
+use Illuminate\Support\Facades\Auth;
+
 class DashboardController extends Controller
 {
     public function updateProfileImage(Request $request)
@@ -28,5 +32,16 @@ class DashboardController extends Controller
         $sekolah->city = $request->filled('city') ? htmlspecialchars($request->input('city')) : $sekolah->city;
         $sekolah->save();
         return redirect()->back()->with('success', 'Data berhasil diubah!');
+    }
+    public function deleteAccount(Request $request)
+    {
+        Akun::where('id', session('id'))->delete();
+        Sekolah::where('id', session('id'))->delete();
+        FoodInfo::where('id_sekolah', session('id'))->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('login');
     }
 }

@@ -16,8 +16,8 @@ class FoodInfoFactory extends Factory
      */
     public function definition(): array
     {
-        $id_sekolah = 16;
-        $jumlah_siswa = 1742;
+        $id_sekolah = 27;
+        $jumlah_siswa = 200;
         $jumlah_porsi = $jumlah_siswa;
         $kualitas_bagus = fake()->numberBetween(1, $jumlah_porsi);
         $kualitas_buruk = $jumlah_porsi - $kualitas_bagus;

@@ -5,7 +5,7 @@
             <h1 class="profileInfo">{{ $sekolah->name }}</h1>
             <h5>PJ Sekolah</h5>
         </div>
-        <img class= "profilImg" src="{{ $sekolah->profile_image
+        <img class="profilImg" src="{{ $sekolah->profile_image
     ? 'data:image/jpeg;base64,' . base64_encode($sekolah->profile_image)
     : asset('Image/profile-user.png') }}" class="rounded-circle" style="width:60px; height:60px; object-fit:cover;">
     </div>
@@ -24,10 +24,13 @@
         <img id="icon3" src="{{ asset('Image/upload.png') }}">
         <label id="iconTitle3">Upload</label>
     </button>
-    <button onclick="window.location.href='{{ route('login') }}'" class=" logout-button">
-        <div class="logout-icon">
-            <div class="door"></div>
-            <div class="arrow"></div>
-        </div>
-    </button>
+    <form action="{{ route('logout') }}" method="post">
+        @csrf
+        <button class=" logout-button">
+            <div class="logout-icon">
+                <div class="door"></div>
+                <div class="arrow"></div>
+            </div>
+        </button>
+    </form>
 </div>

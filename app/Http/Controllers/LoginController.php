@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\returnArgument;
 class LoginController extends Controller
 {
     public function showProfile(Request $request)
@@ -26,5 +27,11 @@ class LoginController extends Controller
         } else {
             return back()->withErrors(['password' => 'Incorrect password']);
         }
+    }
+    public function logout(Request $request)
+    {
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('login');
     }
 }

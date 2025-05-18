@@ -69,6 +69,9 @@ Route::get('/api/all-data', [LaporanController::class, 'getAllData']);
 Route::get('/api/history-data', [HistoryController::class, 'getHistoryData']);
 Route::put('/history/update-food-data/{id}', [HistoryController::class, 'updateData'])->name('updateFoodData');
 Route::post('/kontak/upload', [KontakController::class, 'uploadLaporan'])->name('uploadLaporan');
+Route::delete('/delete-account', [DashboardController::class, 'deleteAccount'])->name('deleteAccount');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 
 

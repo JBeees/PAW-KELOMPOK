@@ -10,6 +10,7 @@ class KontakController extends Controller
     public function uploadLaporan(Request $request)
     {
         $request->validate([
+            'jenisLaporan' => 'required',
             'email' => 'required|email|unique:info_laporan,email',
             'deskripsi' => 'required',
         ]);
